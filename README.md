@@ -92,7 +92,7 @@ final AsyncBean asyncBean = AsyncProxyCreator.create(
     new Sync(), Async.class, Executors.newFixedThreadPool(5));
 ```
 
-That's all. Now you can use you bean asynchronously. All methods will be invoked in threads from thread pool.
+That's all. Now you can use your bean asynchronously. All methods will be invoked in threads from thread pool.
 
 ```java
 // Retrieve result using Future:
