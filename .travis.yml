@@ -1,0 +1,10 @@
+language: java
+script: mvn install -DskipTests=true -P checkstyle,pmd
+after_success:
+  - mvn clean jacoco:report coveralls:report
+jdk:
+  - openjdk6
+  - oraclejdk7
+branches:
+  only:
+  - master
