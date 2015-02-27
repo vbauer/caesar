@@ -5,11 +5,13 @@
 
 > I came, I saw, I conquered. - Julius Caesar
 
-**Caesar** is a tiny library that allows to create asynchronous proxy-version of some synchronous bean.
+**Caesar** is a tiny Java library that allows to create an asynchronous proxy-version of some synchronous bean, so
+you can still think in terms of your service/bean/object and use its methods. Just using a high-level of abstractions,
+instead of writing and supporting concurrency code.
 
-It supports two ways how to describe method signatures:
+It supports two ways how to describe a method signatures:
 
-* Using Java [Futures](http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Future.html)
+* Using standard Java [Futures](http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Future.html)
 * or using [AsyncCallback](src/main/java/com/github/vbauer/caesar/callback/AsyncCallback.java) / [AsyncCallbackAdapter](src/main/java/com/github/vbauer/caesar/callback/AsyncCallbackAdapter.java)
 
 
@@ -29,7 +31,7 @@ public class Sync {
 
 First of all, we need to create an async-interface for this bean:
 ```java
-// It is also just an example: it's unnecessary to write both methods.
+// It is just an example, no needs to write both methods.
 // Choose the most appropriate way for you.
 public interface Async {
 
