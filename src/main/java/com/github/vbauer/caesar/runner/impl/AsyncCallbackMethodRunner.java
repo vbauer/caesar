@@ -37,7 +37,7 @@ public class AsyncCallbackMethodRunner extends AbstractAsyncMethodRunner {
                 try {
                     return targetClass.getMethod(methodName, paramTypes);
                 } catch (final Throwable ignored) {
-                    // Ignored.
+                    return null;
                 }
             }
 

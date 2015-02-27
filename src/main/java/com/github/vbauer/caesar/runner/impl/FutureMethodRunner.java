@@ -20,13 +20,13 @@ public class FutureMethodRunner extends AbstractAsyncMethodRunner {
 
     @Override
     protected Method findSyncMethod(
-            final Class<?> targetClass, final String methodName, final Class<?> returnType, final Class<?>[] parameterTypes
+        final Class<?> targetClass, final String methodName, final Class<?> returnType, final Class<?>[] parameterTypes
     ) {
         if (Future.class == returnType) {
             try {
                 return targetClass.getDeclaredMethod(methodName, parameterTypes);
             } catch (final Throwable ignored) {
-                // Ignored.
+                return null;
             }
         }
         return null;

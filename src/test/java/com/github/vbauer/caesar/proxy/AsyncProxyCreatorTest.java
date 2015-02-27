@@ -105,47 +105,36 @@ public class AsyncProxyCreatorTest {
         });
     }
 
-    @Test
-    public void testException() throws Throwable {
-        try {
-            syncBean.exception();
-            Assert.fail();
-        } catch (final UnsupportedOperationException ignored) {
-            // Ignored.
-        }
-
-        try {
-            check(new Consumer<AsyncCallback<Void>>() {
-                public void set(final AsyncCallback<Void> callback) {
-                    asyncBean.exception(callback);
-                }
-            }, new AsyncCallbackAdapter<Void>());
-        } catch (final Throwable ex) {
-            if (!(ex instanceof UnsupportedOperationException)) {
-                throw ex;
-            }
-        }
+    @Test(expected = UnsupportedOperationException.class)
+    public void testExceptionFuture() throws Throwable {
+        syncBean.exception();
+        Assert.fail();
     }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void testExceptionCallback() throws Throwable {
+        check(new Consumer<AsyncCallback<Void>>() {
+            public void set(final AsyncCallback<Void> callback) {
+                asyncBean.exception(callback);
+            }
+        }, new AsyncCallbackAdapter<Void>());
+    }
+
 
     @Test(expected = UnsupportedOperationException.class)
     public void testIncorrectProxy() throws Throwable {
         Assert.fail(String.valueOf(AsyncProxyCreator.create(syncBean, List.class, executorService)));
     }
 
-    @Test
-    public void testIncorrectPorxyOnDemand() throws Throwable {
-        try {
-            Assert.fail(String.valueOf(asyncBean.methodWithoutSyncImpl()));
-        } catch (final UnsupportedOperationException ignored) {
-            // Ignored.
-        }
+    @Test(expected = UnsupportedOperationException.class)
+    public void testIncorrectProxyOnDemandFuture() throws Throwable {
+        Assert.fail(String.valueOf(asyncBean.methodWithoutSyncImpl()));
+    }
 
-        try {
-            asyncBean.methodWithoutSyncImpl(new AsyncCallbackAdapter<Boolean>());
-            Assert.fail();
-        } catch (final UnsupportedOperationException ignored) {
-            // Ignored.
-        }
+    @Test(expected = UnsupportedOperationException.class)
+    public void testIncorrectProxyOnDemandCallback() throws Throwable {
+        asyncBean.methodWithoutSyncImpl(new AsyncCallbackAdapter<Boolean>());
+        Assert.fail();
     }
 
 

@@ -6,7 +6,7 @@
 It supports two ways how to describe method signatures:
 
 * Using Java [Futures](http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Future.html)
-* or using [AsyncCallback](src/main/java/com/github/vbauer/caesar/callback/AsyncCallback.java) or [AsyncCallbackAdapter](src/main/java/com/github/vbauer/caesar/callback/AsyncCallbackAdapter.java)
+* or using [AsyncCallback](src/main/java/com/github/vbauer/caesar/callback/AsyncCallback.java) / [AsyncCallbackAdapter](src/main/java/com/github/vbauer/caesar/callback/AsyncCallbackAdapter.java)
 
 
 ## Example

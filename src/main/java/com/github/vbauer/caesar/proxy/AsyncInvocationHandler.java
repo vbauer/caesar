@@ -42,7 +42,7 @@ public final class AsyncInvocationHandler implements InvocationHandler {
 
 
     @Override
-    public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
+    public Object invoke(final Object proxy, final Method method, final Object[] args) {
         final AsyncMethodRunner runner = findAsyncMethodRunner(method);
         if (runner != null) {
             return runAsyncMethod(runner, method, args);

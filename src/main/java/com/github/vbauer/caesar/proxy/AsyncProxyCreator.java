@@ -30,11 +30,15 @@ public final class AsyncProxyCreator {
     public static <SYNC, ASYNC> ASYNC create(
         final SYNC bean, final Class<ASYNC> asyncInterface, final ExecutorService executor, final boolean validate
     ) {
-        final AsyncInvocationHandler invocationHandler = AsyncInvocationHandler.create(bean, executor);
+        final AsyncInvocationHandler handler = AsyncInvocationHandler.create(bean, executor);
         final Class<?> beanClass = bean.getClass();
         final ClassLoader classLoader = beanClass.getClassLoader();
-        final ASYNC proxy = (ASYNC) Proxy.newProxyInstance(classLoader, new Class[] { asyncInterface }, invocationHandler);
-        return validate ? validate(proxy, invocationHandler) : proxy;
+        final Class[] interfaces = {
+            asyncInterface,
+        };
+
+        final ASYNC proxy = (ASYNC) Proxy.newProxyInstance(classLoader, interfaces, handler);
+        return validate ? validate(proxy, handler) : proxy;
     }
 
 
