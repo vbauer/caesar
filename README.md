@@ -8,17 +8,17 @@
 **Caesar** is a tiny Java library that allows to create an asynchronous proxy-version of some synchronous bean. It means
 that you can still think in terms of your service/bean/object and use its methods instead of wiring concurrency code.
 
-**Use-cases:**
+**Use cases:**
 
-* You already have got some 3-rd party library that works synchronously, but it is necessary to use it asynchronously.
+* You have already got some 3-rd party library that works synchronously, but it is necessary to use it asynchronously.
 * You need to use both ways (sync & async) in different parts of your applications.
 
-Caesar will help you to solve this problems.
+Caesar will help you to solve these problems.
 
 
 ## Main features:
 
-* Flexible describing a method signatures:
+* Flexible describing of method signatures:
     * Using standard Java [Futures](http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Future.html)
     * or using [AsyncCallback](src/main/java/com/github/vbauer/caesar/callback/AsyncCallback.java) / [AsyncCallbackAdapter](src/main/java/com/github/vbauer/caesar/callback/AsyncCallbackAdapter.java)
 * Small size of library
