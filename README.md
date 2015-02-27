@@ -5,10 +5,15 @@
 
 > I came, I saw, I conquered. - Julius Caesar
 
-**Caesar** is a tiny Java library that allows to create an asynchronous proxy-version of some synchronous bean, so
-you can still think in terms of your service/bean/object and use its methods.
+**Caesar** is a tiny Java library that allows to create an asynchronous proxy-version of some synchronous bean. It means
+that you can still think in terms of your service/bean/object and use its methods instead of wiring concurrency code.
 
-Just using a high-level of abstractions, instead of writing concurrency code.
+**Use-cases:**
+
+* Case 1: You already have got some 3-rd party library that works synchronously, but it is necessary to use it asynchronously.
+* Case 2: You need to use both ways (sync & async) in different parts of your applications.
+
+Caesar will help you to solve this problems.
 
 
 ## Main features:
@@ -88,9 +93,11 @@ final AsyncBean asyncBean = AsyncProxyCreator.create(
 That's all. Now you can use you bean asynchronously. All methods will be invoked in threads from thread pool.
 
 ```java
+// Retrieve result using Future:
 final Future future = asyncBean.hello("World");
 final String text = future.get(); // text is "Hello, World"
 
+// Retrieve result using callback:
 asyncBean.hello("World", new AsyncCallbackAdapter<String>() {
      @Override
      public void onSuccess(final String text) {
