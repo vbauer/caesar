@@ -1,5 +1,6 @@
 package com.github.vbauer.caesar.proxy;
 
+import com.github.vbauer.caesar.basic.BasicTest;
 import com.github.vbauer.caesar.bean.Async;
 import com.github.vbauer.caesar.bean.Sync;
 import com.github.vbauer.caesar.callback.AsyncCallback;
@@ -16,7 +17,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * @author Vladislav Bauer
  */
 
-public class AsyncProxyCreatorTest {
+public class AsyncProxyCreatorTest extends BasicTest {
 
     private static final String PARAMETER = "World";
 
@@ -38,6 +39,11 @@ public class AsyncProxyCreatorTest {
         executorService.shutdown();
     }
 
+
+    @Test
+    public void testConstructorContract() throws Exception {
+        checkUtilConstructorContract(AsyncProxyCreator.class);
+    }
 
     @Test
     public void testWithoutResult() throws Throwable {
