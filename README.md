@@ -6,13 +6,50 @@
 > I came, I saw, I conquered. - Julius Caesar
 
 **Caesar** is a tiny Java library that allows to create an asynchronous proxy-version of some synchronous bean, so
-you can still think in terms of your service/bean/object and use its methods. Just using a high-level of abstractions,
-instead of writing and supporting concurrency code.
+you can still think in terms of your service/bean/object and use its methods.
 
-It supports two ways how to describe a method signatures:
+Just using a high-level of abstractions, instead of writing concurrency code.
 
-* Using standard Java [Futures](http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Future.html)
-* or using [AsyncCallback](src/main/java/com/github/vbauer/caesar/callback/AsyncCallback.java) / [AsyncCallbackAdapter](src/main/java/com/github/vbauer/caesar/callback/AsyncCallbackAdapter.java)
+
+## Main features:
+
+* Flexible describing a method signatures:
+    * Using standard Java [Futures](http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Future.html)
+    * or using [AsyncCallback](src/main/java/com/github/vbauer/caesar/callback/AsyncCallback.java) / [AsyncCallbackAdapter](src/main/java/com/github/vbauer/caesar/callback/AsyncCallbackAdapter.java)
+* Small size of library
+* Compact and very simple API
+* Compatibility:
+    * Java 5+
+    * Android
+
+## Setup
+
+Maven:
+```xml
+<repository>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
+</repository>
+
+<dependency>
+    <groupId>com.github.vbauer</groupId>
+    <artifactId>caesar</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
+Gradle:
+```groovy
+repositories {
+    maven {
+        url "https://jitpack.io"
+    }
+}
+
+dependencies {
+    compile 'com.github.vbauer:caesar:1.0.0'
+}
+```
 
 
 ## Example
@@ -60,36 +97,6 @@ asyncBean.hello("World", new AsyncCallbackAdapter<String>() {
          // text is "Hello, World"
      }
 });
-```
-
-
-## Setup
-
-Maven:
-```xml
-<repository>
-    <id>jitpack.io</id>
-    <url>https://jitpack.io</url>
-</repository>
-
-<dependency>
-    <groupId>com.github.vbauer</groupId>
-    <artifactId>caesar</artifactId>
-    <version>1.0.0</version>
-</dependency>
-```
-
-Gradle:
-```groovy
-repositories {
-    maven {
-        url "https://jitpack.io"
-    }
-}
-
-dependencies {
-    compile 'com.github.vbauer:caesar:1.0.0'
-}
 ```
 
 
