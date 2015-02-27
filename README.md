@@ -1,17 +1,17 @@
 
 # Caesar [![Build Status](https://travis-ci.org/vbauer/caesar.svg)](https://travis-ci.org/vbauer/caesar) [![Coverage Status](https://coveralls.io/repos/vbauer/caesar/badge.svg?branch=master)](https://coveralls.io/r/vbauer/caesar?branch=master) [![Maven](https://img.shields.io/github/tag/vbauer/caesar.svg?label=maven)](https://jitpack.io/#vbauer/caesar)
 
-**Caesar** allows to create asynchronous version of some synchronous bean using.
+**Caesar** is a tiny library that allows to create asynchronous proxy-version of some synchronous bean.
 
-It supports two ways to do it:
+It supports two ways how to describe method signatures:
 
 * Using Java [Futures](http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Future.html)
-* or using [AsyncCallbackAdapter](src/main/java/com/github/vbauer/caesar/callback/AsyncCallback.java)
+* or using [AsyncCallback](src/main/java/com/github/vbauer/caesar/callback/AsyncCallback.java) or [AsyncCallbackAdapter](src/main/java/com/github/vbauer/caesar/callback/AsyncCallbackAdapter.java)
 
 
 ## Example
 
-Lets imagine that we have the following bean:
+Lets make an async-proxy for the following bean:
 ```java
 public class Sync {
 
@@ -23,7 +23,7 @@ public class Sync {
 }
 ```
 
-You need to create an async-interface for this bean:
+First of all, we need to create an async-interface for this bean:
 ```java
 // It is also just an example: it's unnecessary to write both methods.
 // Choose the most appropriate way for you.
@@ -36,13 +36,25 @@ public interface Async {
 }
 ```
 
-After that we can create async-proxy:
+After that we can create an async-proxy using `AsyncProxyCreator`:
 ```java
 final AsyncBean asyncBean = AsyncProxyCreator.create(
     new Sync(), Async.class, Executors.newFixedThreadPool(5));
 ```
 
 That's all. Now you can use you bean asynchronously. All methods will be invoked in threads from thread pool.
+
+```java
+final Future future = asyncBean.hello("World");
+final String text = future.get(); // text is "Hello, World"
+
+asyncBean.hello("World", new AsyncCallbackAdapter<String>() {
+     @Override
+     public void onSuccess(final String text) {
+         // text is "Hello, World"
+     }
+});
+```
 
 
 ## Setup
