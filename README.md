@@ -1,5 +1,5 @@
 
-# Caesar [![Build Status](https://travis-ci.org/vbauer/caesar.svg)](https://travis-ci.org/vbauer/caesar) [![Coverage Status](https://coveralls.io/repos/vbauer/caesar/badge.svg?branch=master)](https://coveralls.io/r/vbauer/caesar?branch=master) [![Maven](https://img.shields.io/github/tag/vbauer/caesar.svg?label=maven)](https://jitpack.io/#vbauer/caesar)
+# Caesar [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Caesar-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1598) [![Build Status](https://travis-ci.org/vbauer/caesar.svg)](https://travis-ci.org/vbauer/caesar) [![Coverage Status](https://coveralls.io/repos/vbauer/caesar/badge.svg?branch=master)](https://coveralls.io/r/vbauer/caesar?branch=master) [![Maven](https://img.shields.io/github/tag/vbauer/caesar.svg?label=maven)](https://jitpack.io/#vbauer/caesar)
 
 <img align="right" style="margin-left: 15px" width="250" height="268" src="misc/caesar.png">
 
