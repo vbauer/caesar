@@ -10,8 +10,8 @@ that you can still think in terms of your service/bean/object and use its method
 
 **Use-cases:**
 
-* Case 1: You already have got some 3-rd party library that works synchronously, but it is necessary to use it asynchronously.
-* Case 2: You need to use both ways (sync & async) in different parts of your applications.
+* You already have got some 3-rd party library that works synchronously, but it is necessary to use it asynchronously.
+* You need to use both ways (sync & async) in different parts of your applications.
 
 Caesar will help you to solve this problems.
 
@@ -77,8 +77,10 @@ First of all, we need to create an async-interface for this bean:
 // Choose the most appropriate way for you.
 public interface Async {
 
+    // Future<T> will be the new return type.
     Future<String> hello(String name);
 
+    // AsyncCallback<T> should be added as the last parameter.
     void hello(String name, AsyncCallback<String> callback);
 
 }
