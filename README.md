@@ -1,6 +1,10 @@
 
 # Caesar [![Build Status](https://travis-ci.org/vbauer/caesar.svg)](https://travis-ci.org/vbauer/caesar) [![Coverage Status](https://coveralls.io/repos/vbauer/caesar/badge.svg?branch=master)](https://coveralls.io/r/vbauer/caesar?branch=master) [![Maven](https://img.shields.io/github/tag/vbauer/caesar.svg?label=maven)](https://jitpack.io/#vbauer/caesar)
 
+<img align="right" style="margin-left: 15px" width="250" height="268" src="misc/caesar.png">
+
+> I came, I saw, I conquered. - Julius Caesar
+
 **Caesar** is a tiny library that allows to create asynchronous proxy-version of some synchronous bean.
 
 It supports two ways how to describe method signatures:
