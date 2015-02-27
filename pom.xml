@@ -50,7 +50,7 @@
         <maven.surefire.plugin.version>2.18.1</maven.surefire.plugin.version>
         <maven.checkstyle.plugin.version>2.14</maven.checkstyle.plugin.version>
         <maven.pmd.plugin.version>3.4</maven.pmd.plugin.version>
-        <maven.jacoco.plugin.version>0.7.3.201502191951</maven.jacoco.plugin.version>
+        <maven.cobertura.plugin.version>2.6</maven.cobertura.plugin.version>
         <maven.coveralls.plugin.version>3.0.1</maven.coveralls.plugin.version>
     </properties>
 
@@ -104,17 +104,14 @@
             </plugin>
 
             <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${maven.jacoco.plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>prepare-agent</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>${maven.cobertura.plugin.version}</version>
+                <configuration>
+                    <check>true</check>
+                    <format>xml</format>
+                    <maxmem>256m</maxmem>
+                </configuration>
             </plugin>
 
             <plugin>

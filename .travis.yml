@@ -1,7 +1,7 @@
 language: java
 script: mvn install -DskipTests=true -P checkstyle,pmd
 after_success:
-  - mvn clean jacoco:report coveralls:report
+  - mvn clean cobertura:cobertura coveralls:report
 jdk:
   - openjdk6
   - oraclejdk7
