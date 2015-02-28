@@ -5,6 +5,7 @@ import com.github.vbauer.caesar.bean.Async;
 import com.github.vbauer.caesar.bean.Sync;
 import com.github.vbauer.caesar.callback.AsyncCallback;
 import com.github.vbauer.caesar.callback.AsyncCallbackAdapter;
+import com.github.vbauer.caesar.exception.MissedSyncMethodException;
 import org.junit.*;
 
 import java.util.List;
@@ -127,17 +128,17 @@ public class AsyncProxyCreatorTest extends BasicTest {
     }
 
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test(expected = MissedSyncMethodException.class)
     public void testIncorrectProxy() throws Throwable {
         Assert.fail(String.valueOf(AsyncProxyCreator.create(syncBean, List.class, executorService)));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test(expected = MissedSyncMethodException.class)
     public void testIncorrectProxyOnDemandFuture() throws Throwable {
         Assert.fail(String.valueOf(asyncBean.methodWithoutSyncImpl()));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test(expected = MissedSyncMethodException.class)
     public void testIncorrectProxyOnDemandCallback() throws Throwable {
         asyncBean.methodWithoutSyncImpl(new AsyncCallbackAdapter<Boolean>());
         Assert.fail();

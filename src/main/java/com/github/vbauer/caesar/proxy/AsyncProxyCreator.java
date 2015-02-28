@@ -1,5 +1,6 @@
 package com.github.vbauer.caesar.proxy;
 
+import com.github.vbauer.caesar.exception.MissedSyncMethodException;
 import com.github.vbauer.caesar.runner.AsyncMethodRunner;
 import com.github.vbauer.caesar.util.ReflectionUtils;
 
@@ -49,7 +50,7 @@ public final class AsyncProxyCreator {
         for (final Method method : methods) {
             final AsyncMethodRunner runner = handler.findAsyncMethodRunner(method);
             if (runner == null) {
-                handler.throwError(method, method.getParameterTypes());
+                throw new MissedSyncMethodException(method);
             }
         }
 

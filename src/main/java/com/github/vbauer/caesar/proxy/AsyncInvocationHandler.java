@@ -1,5 +1,6 @@
 package com.github.vbauer.caesar.proxy;
 
+import com.github.vbauer.caesar.exception.MissedSyncMethodException;
 import com.github.vbauer.caesar.runner.AsyncMethodRunner;
 import com.github.vbauer.caesar.runner.impl.AsyncCallbackMethodRunner;
 import com.github.vbauer.caesar.runner.impl.FutureMethodRunner;
@@ -33,29 +34,22 @@ public final class AsyncInvocationHandler implements InvocationHandler {
 
     public static AsyncInvocationHandler create(final Object origin, final ExecutorService executor) {
         final List<AsyncMethodRunner> runners = Arrays.<AsyncMethodRunner>asList(
-                new AsyncCallbackMethodRunner(),
-                new FutureMethodRunner()
+            new AsyncCallbackMethodRunner(),
+            new FutureMethodRunner()
         );
 
         return new AsyncInvocationHandler(origin, executor, runners);
     }
 
 
-    @Override
     public Object invoke(final Object proxy, final Method method, final Object[] args) {
         final AsyncMethodRunner runner = findAsyncMethodRunner(method);
         if (runner != null) {
             return runAsyncMethod(runner, method, args);
         }
-        return throwError(method, args);
+        throw new MissedSyncMethodException(method, args);
     }
 
-
-    /*package*/ Object throwError(final Method method, final Object[] args) {
-        throw new UnsupportedOperationException(String.format(
-            "Can't find appropriate sync-method \"%s\", parameters: %s", method, Arrays.toString(args)
-        ));
-    }
 
     /*package*/ AsyncMethodRunner findAsyncMethodRunner(final Method method) {
         for (final AsyncMethodRunner runner : runners) {
