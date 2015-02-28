@@ -21,7 +21,7 @@ Caesar will help you to solve these problems.
 * Flexible describing of method signatures:
     * Using standard Java [Futures](http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Future.html)
     * or using [AsyncCallback](src/main/java/com/github/vbauer/caesar/callback/AsyncCallback.java) / [AsyncCallbackAdapter](src/main/java/com/github/vbauer/caesar/callback/AsyncCallbackAdapter.java)
-* Small size of library
+* Small library size with zero dependencies
 * Compact and very simple API
 * Compatibility:
     * Java 5+
@@ -132,3 +132,5 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+See [LICENSE](LICENSE) file for details.
