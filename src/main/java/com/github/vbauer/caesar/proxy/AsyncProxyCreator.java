@@ -34,7 +34,7 @@ public final class AsyncProxyCreator {
         final AsyncInvocationHandler handler = AsyncInvocationHandler.create(bean, executor);
         final Class<?> beanClass = bean.getClass();
         final ClassLoader classLoader = beanClass.getClassLoader();
-        final Class[] interfaces = {
+        final Class<?>[] interfaces = {
             asyncInterface,
         };
 
