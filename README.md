@@ -57,6 +57,36 @@ dependencies {
 ```
 
 
+## Async-proxy creation
+
+To make async-proxy for some bean, you need to use `AsyncProxyCreator`:
+
+```java
+    public static <SYNC, ASYNC> ASYNC create(
+        final SYNC bean,
+        final Class<ASYNC> asyncInterface,
+        final ExecutorService executor,
+        final boolean validate
+    )
+```
+
+**Parameters:**
+
+<dl>
+    <dt>bean</dt>
+    <dd>Not-null object which will be wrapped by async-proxy.</dd>
+    
+    <dt>asyncInterface</dt>
+    <dd>Class which represents async-proxy. See an example section for more details.</dd>
+
+    <dt>executor</dt>
+    <dd>Executor service for running background operations. The usual choice is `ThreadPoolExecutor`.</dd>
+    
+    <dt>validate</dt>
+    <dd>Validate mapping between bean and asyncInterface during proxy creation (otherwise it will be checked in runtime). It is an optional parameter (default value is true).</dd>
+</dl>
+
+
 ## Example
 
 Lets make an async-proxy for the following bean:
