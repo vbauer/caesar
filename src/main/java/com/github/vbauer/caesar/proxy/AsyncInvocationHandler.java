@@ -2,12 +2,10 @@ package com.github.vbauer.caesar.proxy;
 
 import com.github.vbauer.caesar.exception.MissedSyncMethodException;
 import com.github.vbauer.caesar.runner.AsyncMethodRunner;
-import com.github.vbauer.caesar.runner.impl.AsyncCallbackMethodRunner;
-import com.github.vbauer.caesar.runner.impl.FutureMethodRunner;
+import com.github.vbauer.caesar.util.ReflectionUtils;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -17,6 +15,12 @@ import java.util.concurrent.ExecutorService;
  */
 
 public final class AsyncInvocationHandler implements InvocationHandler {
+
+    private static final String[] METHOD_RUNNERS = {
+        "com.github.vbauer.caesar.runner.impl.AsyncCallbackMethodRunner",
+        "com.github.vbauer.caesar.runner.impl.FutureMethodRunner",
+    };
+
 
     private final Object origin;
     private final ExecutorService executor;
@@ -33,11 +37,7 @@ public final class AsyncInvocationHandler implements InvocationHandler {
 
 
     public static AsyncInvocationHandler create(final Object origin, final ExecutorService executor) {
-        final List<AsyncMethodRunner> runners = Arrays.<AsyncMethodRunner>asList(
-            new AsyncCallbackMethodRunner(),
-            new FutureMethodRunner()
-        );
-
+        final List<AsyncMethodRunner> runners = ReflectionUtils.createObjects(METHOD_RUNNERS);
         return new AsyncInvocationHandler(origin, executor, runners);
     }
 
