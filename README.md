@@ -6,7 +6,7 @@
 > I came, I saw, I conquered. - Julius Caesar
 
 **Caesar** is a tiny Java library that allows to create an asynchronous proxy-version of some synchronous bean. It means
-that you can still think in terms of your service/bean/object and use its methods instead of wiring concurrency code.
+that you can still think in terms of your service/bean/object and use its methods instead of writing concurrency code.
 
 **Use cases:**
 
