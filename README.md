@@ -62,12 +62,12 @@ dependencies {
 To make async-proxy for some bean, you need to use `AsyncProxyCreator`:
 
 ```java
-    public static <SYNC, ASYNC> ASYNC create(
-        final SYNC bean,
-        final Class<ASYNC> asyncInterface,
-        final ExecutorService executor,
-        final boolean validate
-    )
+public static <SYNC, ASYNC> ASYNC create(
+    final SYNC bean,
+    final Class<ASYNC> asyncInterface,
+    final ExecutorService executor,
+    final boolean validate
+)
 ```
 
 **Parameters:**
