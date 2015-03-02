@@ -19,8 +19,8 @@ Caesar will help you to solve these problems.
 ## Main features:
 
 * Flexible describing of method signatures:
-    * using standard Java [Futures](http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Future.html)
-    * or using [RxJava](https://github.com/ReactiveX/RxJava)'s [Observable](https://github.com/ReactiveX/RxJava/wiki/Observable)
+    * using standard Java [Future](http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Future.html)
+    * or using [RxJava](https://github.com/ReactiveX/RxJava) [Observable](https://github.com/ReactiveX/RxJava/wiki/Observable)
     * or using custom [AsyncCallback](src/main/java/com/github/vbauer/caesar/callback/AsyncCallback.java) / [AsyncCallbackAdapter](src/main/java/com/github/vbauer/caesar/callback/AsyncCallbackAdapter.java)
 * Small library size with zero dependencies
 * Compact and very simple API
