@@ -90,9 +90,7 @@ public static <SYNC, ASYNC> ASYNC create(
 
 ## Mapping, Naming conventions
 
-> Method name and parameter types for Java. For example, the parameter annotations and names don't matter. The method signature is the name and parameter list only. no, in Java the method signature doesn't includes the return type, but the declaration
-
-To make correct mapping between object and async-proxy, it is necessary to preform some conventions.
+To make correct mapping between object and async-proxy, it is necessary to perform some conventions.
 Asynchronous proxy method signature must match the signature of the object method, except several points:
 
 * To use **Future** as result value, return class must be `Future<T>`
@@ -109,7 +107,7 @@ Lets make an async-proxy for the following bean:
 public class Sync {
 
     public String hello(final String name) {
-        // It's just an example.
+        // Just a simple code for an example.
         return String.format("Hello, %s", name);
     }
 
