@@ -19,8 +19,9 @@ Caesar will help you to solve these problems.
 ## Main features:
 
 * Flexible describing of method signatures:
-    * Using standard Java [Futures](http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Future.html)
-    * or using [AsyncCallback](src/main/java/com/github/vbauer/caesar/callback/AsyncCallback.java) / [AsyncCallbackAdapter](src/main/java/com/github/vbauer/caesar/callback/AsyncCallbackAdapter.java)
+    * using standard Java [Futures](http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Future.html)
+    * or using [RxJava](https://github.com/ReactiveX/RxJava)'s [Observable](https://github.com/ReactiveX/RxJava/wiki/Observable)
+    * or using custom [AsyncCallback](src/main/java/com/github/vbauer/caesar/callback/AsyncCallback.java) / [AsyncCallbackAdapter](src/main/java/com/github/vbauer/caesar/callback/AsyncCallbackAdapter.java)
 * Small library size with zero dependencies
 * Compact and very simple API
 * Compatibility:
@@ -94,8 +95,9 @@ public static <SYNC, ASYNC> ASYNC create(
 To make correct mapping between object and async-proxy, it is necessary to preform some conventions.
 Asynchronous proxy method signature must match the signature of the object method, except several points:
 
-* To use **future** as result value, return class must be `Future<T>`
-* To use **callbacks**, you need to:
+* To use **Future** as result value, return class must be `Future<T>`
+* To use **RxJava**, return class must be `Observable<T>`
+* To use **AsyncCallback**, you need to:
     * add new parameter `AsyncCallback<T>` at the end of the method signature
     * change result type to `void`
 
@@ -116,12 +118,15 @@ public class Sync {
 
 First of all, we need to create an async-interface for this bean:
 ```java
-// It is just an example, no needs to write both methods.
-// Choose the most appropriate way for you.
+// No needs to write both methods. Choose the most appropriate way for you.
+// First 2 methods could not be presented at the same time in the real code, it is just an example.
 public interface Async {
 
     // Future<T> will be the new return type.
     Future<String> hello(String name);
+
+    // Observable<T> will be the new return type.
+    Observable<String> hello(String name);
 
     // AsyncCallback<T> should be added as the last parameter.
     void hello(String name, AsyncCallback<String> callback);
@@ -139,14 +144,18 @@ That's all. Now you can use your bean asynchronously. All methods will be invoke
 
 ```java
 // Retrieve result using Future:
-final Future future = asyncBean.hello("World");
-final String text = future.get(); // text is "Hello, World"
+final Future future = asyncBean.hello("John");
+final String text = future.get(); // text is "Hello, John"
+
+// Retrieve result using RxJava and Observable:
+final Observable<String> observable = asyncBean.hello("Paul");
+final String text = observable.toBlocking().first(); // text is "Hello, Paul"
 
 // Retrieve result using callback:
-asyncBean.hello("World", new AsyncCallbackAdapter<String>() {
+asyncBean.hello("Ringo", new AsyncCallbackAdapter<String>() {
      @Override
      public void onSuccess(final String text) {
-         // text is "Hello, World"
+         // text is "Hello, Ringo"
      }
 });
 ```
