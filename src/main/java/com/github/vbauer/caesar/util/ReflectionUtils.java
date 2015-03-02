@@ -2,6 +2,7 @@ package com.github.vbauer.caesar.util;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -9,6 +10,9 @@ import java.util.List;
  */
 
 public final class ReflectionUtils {
+
+    public static final String PACKAGE_SEPARATOR = ".";
+    
 
     private ReflectionUtils() {
         throw new UnsupportedOperationException();
@@ -49,7 +53,7 @@ public final class ReflectionUtils {
         }
     }
 
-    public static <T> List<T> createObjects(final String... classNames) {
+    public static <T> Collection<T> createObjects(final Collection<String> classNames) {
         final List<T> objects = new ArrayList<T>();
         for (final String className : classNames) {
             final T object = createObject(className);
@@ -59,5 +63,13 @@ public final class ReflectionUtils {
         }
         return objects;
     }
-
+    
+    public static Collection<String> classNames(final String packageName, final Collection<String> classNames) {
+        final List<String> result = new ArrayList<String>();
+        for (final String className : classNames) {
+            result.add(packageName + PACKAGE_SEPARATOR + className);
+        }
+        return result;        
+    }
+    
 }

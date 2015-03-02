@@ -2,11 +2,11 @@ package com.github.vbauer.caesar.proxy;
 
 import com.github.vbauer.caesar.exception.MissedSyncMethodException;
 import com.github.vbauer.caesar.runner.AsyncMethodRunner;
-import com.github.vbauer.caesar.util.ReflectionUtils;
+import com.github.vbauer.caesar.runner.AsyncMethodRunnerFactory;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
-import java.util.List;
+import java.util.Collection;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 
@@ -16,29 +16,21 @@ import java.util.concurrent.ExecutorService;
 
 public final class AsyncInvocationHandler implements InvocationHandler {
 
-    private static final String[] METHOD_RUNNERS = {
-        "com.github.vbauer.caesar.runner.impl.AsyncCallbackMethodRunner",
-        "com.github.vbauer.caesar.runner.impl.FutureMethodRunner",
-    };
-
-
+    private static final Collection<AsyncMethodRunner> METHOD_RUNNERS =
+        AsyncMethodRunnerFactory.createMethodRunners();
+    
     private final Object origin;
     private final ExecutorService executor;
-    private final List<AsyncMethodRunner> runners;
 
 
-    private AsyncInvocationHandler(
-        final Object origin, final ExecutorService executor, final List<AsyncMethodRunner> runners
-    ) {
+    private AsyncInvocationHandler(final Object origin, final ExecutorService executor) {
         this.origin = origin;
         this.executor = executor;
-        this.runners = runners;
     }
 
 
     public static AsyncInvocationHandler create(final Object origin, final ExecutorService executor) {
-        final List<AsyncMethodRunner> runners = ReflectionUtils.createObjects(METHOD_RUNNERS);
-        return new AsyncInvocationHandler(origin, executor, runners);
+        return new AsyncInvocationHandler(origin, executor);
     }
 
 
@@ -52,7 +44,7 @@ public final class AsyncInvocationHandler implements InvocationHandler {
 
 
     /*package*/ AsyncMethodRunner findAsyncMethodRunner(final Method method) {
-        for (final AsyncMethodRunner runner : runners) {
+        for (final AsyncMethodRunner runner : METHOD_RUNNERS) {
             final Method syncMethod = runner.findSyncMethod(origin, method);
             if (syncMethod != null) {
                 return runner;
