@@ -118,8 +118,9 @@ public class Sync {
 
 First of all, we need to create an async-interface for this bean:
 ```java
+// IMPORTANT: It is just an example.
 // No needs to write both methods. Choose the most appropriate way for you.
-// First 2 methods could not be presented at the same time in the real code, it is just an example.
+// First 2 methods could not be presented at the same time in the real code.
 public interface Async {
 
     // Future<T> will be the new return type.
