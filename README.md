@@ -40,7 +40,7 @@ Maven:
 <dependency>
     <groupId>com.github.vbauer</groupId>
     <artifactId>caesar</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
 </dependency>
 ```
 
@@ -53,7 +53,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.vbauer:caesar:1.0.0'
+    compile 'com.github.vbauer:caesar:1.1.0'
 }
 ```
 
