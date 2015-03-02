@@ -19,16 +19,6 @@ public class ReflectionUtilsTest extends BasicTest {
         checkUtilConstructorContract(ReflectionUtils.class);
     }
 
-    @Test(expected = RuntimeException.class)
-    public void testHandleReflectionException() {
-        ReflectionUtils.handleReflectionException(new Exception());
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void testHandleReflectionRuntimeException() {
-        ReflectionUtils.handleReflectionException(new RuntimeException());
-    }
-
     @Test
     public void testCreateObject() {
         Assert.assertEquals(Object.class, ReflectionUtils.createObject("java.lang.Object").getClass());

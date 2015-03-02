@@ -5,20 +5,20 @@ import com.github.vbauer.caesar.util.ReflectionUtils;
 import rx.Observable;
 
 import java.lang.reflect.Method;
-import java.util.concurrent.Callable;
+import java.util.concurrent.Future;
 
 /**
  * @author Vladislav Bauer 
  */
 
+@SuppressWarnings("all")
 public class ObservableMethodRunner extends AbstractAsyncMethodRunner {
 
-    public <T> Callable<T> createCall(
-        final Object origin, final Method syncMethod, final Object[] args
-    ) {
-        // TODO
-        return null;
+    @Override
+    public Object wrapResultFuture(final Future<?> future) {
+        return Observable.from(future);
     }
+
 
     @Override
     protected Method findSyncMethod(

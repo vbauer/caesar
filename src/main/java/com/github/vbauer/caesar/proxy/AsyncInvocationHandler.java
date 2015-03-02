@@ -9,6 +9,7 @@ import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 
 /**
  * @author Vladislav Bauer
@@ -61,7 +62,8 @@ public final class AsyncInvocationHandler implements InvocationHandler {
 
         try {
             final Callable<Object> task = runner.createCall(origin, syncMethod, args);
-            return executor.submit(task);
+            final Future<Object> future = executor.submit(task);
+            return runner.wrapResultFuture(future);
         } finally {
             syncMethod.setAccessible(methodAccessible);
         }

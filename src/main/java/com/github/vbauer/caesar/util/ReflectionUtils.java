@@ -36,13 +36,6 @@ public final class ReflectionUtils {
         }
     }
 
-    public static <T> T handleReflectionException(final Throwable ex) {
-        if (ex instanceof RuntimeException) {
-            throw (RuntimeException) ex;
-        }
-        throw new RuntimeException(ex);
-    }
-
     @SuppressWarnings("unchecked")
     public static <T> T createObject(final String className) {
         try {
