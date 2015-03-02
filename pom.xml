@@ -41,8 +41,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.5</java.version>
 
-        <spring.version>3.2.13.RELEASE</spring.version>
-
+        <rxjava.version>1.0.7</rxjava.version>
+        
         <junit.version>4.12</junit.version>
 
         <maven.compiler.plugin.version>3.2</maven.compiler.plugin.version>
@@ -56,6 +56,13 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>io.reactivex</groupId>
+            <artifactId>rxjava</artifactId>
+            <version>${rxjava.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        
         <!-- Testing -->
 
         <dependency>
@@ -64,7 +71,7 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-
+        
     </dependencies>
 
     <build>

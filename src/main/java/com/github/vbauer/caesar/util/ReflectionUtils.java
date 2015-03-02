@@ -71,5 +71,15 @@ public final class ReflectionUtils {
         }
         return result;        
     }
+
+    public static Method findDeclaredMethod(
+        final Class<?> objectClass, final String methodName, final Class<?>[] parameterTypes
+    ) {
+        try {
+            return objectClass.getDeclaredMethod(methodName, parameterTypes);
+        } catch (final Throwable ignored) {
+            return null;
+        }
+    }
     
 }

@@ -34,11 +34,7 @@ public class AsyncCallbackMethodRunner extends AbstractAsyncMethodRunner {
 
             if (AsyncCallback.class.isAssignableFrom(lastParam)) {
                 final Class<?>[] paramTypes = Arrays.copyOf(parameterTypes, lastIndex);
-                try {
-                    return targetClass.getMethod(methodName, paramTypes);
-                } catch (final Throwable ignored) {
-                    return null;
-                }
+                return ReflectionUtils.findDeclaredMethod(targetClass, methodName, paramTypes);
             }
 
         }

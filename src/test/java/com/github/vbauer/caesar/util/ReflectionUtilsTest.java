@@ -52,7 +52,7 @@ public class ReflectionUtilsTest extends BasicTest {
         final Collection<String> result =
             ReflectionUtils.classNames(packageName, Arrays.asList(classNames));
 
-        Assert.assertEquals(2, result.size());
+        Assert.assertEquals(classNames.length, result.size());
         Assert.assertEquals(
             packageName + ReflectionUtils.PACKAGE_SEPARATOR + classNames[0],
             result.iterator().next()

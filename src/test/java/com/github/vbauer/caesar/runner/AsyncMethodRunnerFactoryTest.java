@@ -24,8 +24,9 @@ public class AsyncMethodRunnerFactoryTest extends BasicTest {
             AsyncMethodRunnerFactory.createMethodRunners();
 
         final Iterator<AsyncMethodRunner> iterator = methodRunners.iterator();
-        final int runnersCount = 2;
-        
+        final int runnersCount = AsyncMethodRunnerFactory.CLASS_NAMES.length;
+
+        //noinspection ForLoopReplaceableByForEach
         for (int i = 0; i < runnersCount; i++) {
             Assert.assertNotNull(iterator.next());
         }
