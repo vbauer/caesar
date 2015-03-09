@@ -117,7 +117,7 @@ public class Sync {
 First of all, we need to create an async-interface for this bean:
 ```java
 // IMPORTANT: It is just an example.
-// No needs to write both methods. Choose the most appropriate way for you.
+// No needs to write all methods. Choose the most appropriate way for you.
 // First 2 methods could not be presented at the same time in the real code.
 public interface Async {
 
