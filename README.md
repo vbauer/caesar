@@ -40,7 +40,7 @@ Maven:
 <dependency>
     <groupId>com.github.vbauer</groupId>
     <artifactId>caesar</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
 </dependency>
 ```
 
@@ -53,7 +53,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.vbauer:caesar:1.1.0'
+    compile 'com.github.vbauer:caesar:1.2.0'
 }
 ```
 
@@ -96,7 +96,7 @@ Asynchronous proxy method signature must match the signature of the object metho
 * To use **Future** as result value, return class must be `Future<T>`
 * To use **RxJava**, return class must be `Observable<T>`
 * To use **AsyncCallback**, you need to:
-    * add new parameter `AsyncCallback<T>` at the end of the method signature
+    * add new parameter `AsyncCallback<T>` at the first place of the method signature
     * change result type to `void`
 
 
@@ -127,8 +127,8 @@ public interface Async {
     // Observable<T> will be the new return type.
     Observable<String> hello(String name);
 
-    // AsyncCallback<T> should be added as the last parameter.
-    void hello(String name, AsyncCallback<String> callback);
+    // AsyncCallback<T> should be added as the first parameter.
+    void hello(AsyncCallback<String> callback, String name);
 
 }
 ```
@@ -151,12 +151,12 @@ final Observable<String> observable = asyncBean.hello("Paul");
 final String text = observable.toBlocking().first(); // text is "Hello, Paul"
 
 // Retrieve result using callback:
-asyncBean.hello("Ringo", new AsyncCallbackAdapter<String>() {
+asyncBean.hello(new AsyncCallbackAdapter<String>() {
      @Override
      public void onSuccess(final String text) {
          // text is "Hello, Ringo"
      }
-});
+}, "Ringo");
 ```
 
 

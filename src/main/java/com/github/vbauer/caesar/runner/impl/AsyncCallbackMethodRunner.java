@@ -18,12 +18,10 @@ public class AsyncCallbackMethodRunner extends AbstractAsyncMethodRunner {
 
     @Override
     public <T> Callable<T> createCall(final Object origin, final Method syncMethod, final Object[] args) {
-        final int lastIndex = args.length - 1;
-        final Object lastParam = args[lastIndex];
-        final Object[] lessArgs = Arrays.copyOf(args, lastIndex);
-        final AsyncCallback asyncCallback = (AsyncCallback) lastParam;
+        final AsyncCallback asyncCallback = (AsyncCallback) args[0];
+        final Object[] restArgs = Arrays.copyOfRange(args, 1, args.length);
 
-        return new AsyncCallbackTask<T>(origin, syncMethod, lessArgs, asyncCallback);
+        return new AsyncCallbackTask<T>(origin, syncMethod, restArgs, asyncCallback);
     }
 
     @Override
@@ -32,12 +30,11 @@ public class AsyncCallbackMethodRunner extends AbstractAsyncMethodRunner {
         final Class<?> returnType, final Class<?>[] parameterTypes
     ) {
         if (void.class == returnType && parameterTypes != null && parameterTypes.length > 0) {
-            final int lastIndex = parameterTypes.length - 1;
-            final Class<?> lastParam = parameterTypes[lastIndex];
+            final Class<?> lastParam = (Class<?>) parameterTypes[0];
 
             if (AsyncCallback.class.isAssignableFrom(lastParam)) {
-                final Class<?>[] paramTypes = Arrays.copyOf(parameterTypes, lastIndex);
-                return ReflectionUtils.findDeclaredMethod(targetClass, methodName, paramTypes);
+                final Class<?>[] restParamTypes = Arrays.copyOfRange(parameterTypes, 1, parameterTypes.length);
+                return ReflectionUtils.findDeclaredMethod(targetClass, methodName, restParamTypes);
             }
 
         }

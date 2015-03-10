@@ -29,7 +29,7 @@ public class AsyncCallbackMethodRunnerTest extends BasicRunnerTest {
     public void test1ArgumentWithoutResult() throws Throwable {
         check(new Consumer<AsyncCallback<Void>>() {
             public void set(final AsyncCallback<Void> callback) {
-                getCallbackAsync().emptyHello(PARAMETER, callback);
+                getCallbackAsync().emptyHello(callback, PARAMETER);
             }
         }, notNullResultCallback());
     }
@@ -38,7 +38,7 @@ public class AsyncCallbackMethodRunnerTest extends BasicRunnerTest {
     public void test1ArgumentWithResult() throws Throwable {
         check(new Consumer<AsyncCallback<String>>() {
             public void set(final AsyncCallback<String> callback) {
-                getCallbackAsync().hello(PARAMETER, callback);
+                getCallbackAsync().hello(callback, PARAMETER);
             }
         }, new AsyncCallbackAdapter<String>() {
             @Override
@@ -52,7 +52,7 @@ public class AsyncCallbackMethodRunnerTest extends BasicRunnerTest {
     public void test2ArgumentsWithResult() throws Throwable {
         check(new Consumer<AsyncCallback<String>>() {
             public void set(final AsyncCallback<String> callback) {
-                getCallbackAsync().hello(PARAMETER, PARAMETER, callback);
+                getCallbackAsync().hello(callback, PARAMETER, PARAMETER);
             }
         }, new AsyncCallbackAdapter<String>() {
             @Override

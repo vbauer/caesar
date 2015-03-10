@@ -8,11 +8,11 @@ import com.github.vbauer.caesar.callback.AsyncCallback;
 
 public interface CallbackAsync {
 
-    void hello(String name1, String name2, AsyncCallback<String> callback);
+    void hello(AsyncCallback<String> callback, String name1, String name2);
 
-    void hello(String name, AsyncCallback<String> callback);
+    void hello(AsyncCallback<String> callback, String name);
 
-    void emptyHello(String name, AsyncCallback<Void> callback);
+    void emptyHello(AsyncCallback<Void> callback, String name);
 
     void empty(AsyncCallback<Void> callback);
 
