@@ -28,11 +28,7 @@ public final class ReflectionUtils {
 
             return (Class<T>) method.invoke(null, object);
         } catch (final Exception ex) {
-            try {
-                return (Class<T>) object.getClass();
-            } catch (final Exception e) {
-                return null;
-            }
+            return object != null ? (Class<T>) object.getClass() : null;
         }
     }
 

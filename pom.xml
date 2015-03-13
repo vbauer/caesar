@@ -44,6 +44,7 @@
         <rxjava.version>1.0.7</rxjava.version>
         
         <junit.version>4.12</junit.version>
+        <hibernate.version>3.5.4-Final</hibernate.version>
 
         <maven.compiler.plugin.version>3.2</maven.compiler.plugin.version>
         <maven.source.plugin.version>2.4</maven.source.plugin.version>
@@ -72,7 +73,14 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-        
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
