@@ -2,6 +2,8 @@ package com.github.vbauer.caesar.basic;
 
 import com.github.vbauer.caesar.bean.CallbackAsync;
 import com.github.vbauer.caesar.bean.FutureAsync;
+import com.github.vbauer.caesar.bean.FutureCallbackAsync;
+import com.github.vbauer.caesar.bean.ListenableFutureAsync;
 import com.github.vbauer.caesar.bean.ObservableAsync;
 import com.github.vbauer.caesar.bean.Sync;
 import com.github.vbauer.caesar.proxy.AsyncProxyCreator;
@@ -22,22 +24,27 @@ public abstract class BasicRunnerTest extends BasicTest {
     private final ThreadLocal<ExecutorService> executorServiceHolder = new ThreadLocal<ExecutorService>();
     private final ThreadLocal<Sync> syncBeanHolder = new ThreadLocal<Sync>();
     private final ThreadLocal<CallbackAsync> callbackAsyncHolder = new ThreadLocal<CallbackAsync>();
+    private final ThreadLocal<FutureCallbackAsync> futureCallbackAsyncHolder = new ThreadLocal<FutureCallbackAsync>();
     private final ThreadLocal<FutureAsync> futureAsyncHolder = new ThreadLocal<FutureAsync>();
+    private final ThreadLocal<ListenableFutureAsync> listenableFutureAsyncHolder = new ThreadLocal<ListenableFutureAsync>();
     private final ThreadLocal<ObservableAsync> observableAsyncHolder = new ThreadLocal<ObservableAsync>();
-
 
     @Before
     public final void before() {
         final ExecutorService executor = Executors.newFixedThreadPool(5);
         final Sync sync = new Sync();
         final CallbackAsync callbackAsync = AsyncProxyCreator.create(sync, CallbackAsync.class, executor, false);
+        final FutureCallbackAsync futureCallbackAsync = AsyncProxyCreator.create(sync, FutureCallbackAsync.class, executor, false);
         final FutureAsync futureAsync = AsyncProxyCreator.create(sync, FutureAsync.class, executor, false);
+        final ListenableFutureAsync listenableFutureAsync = AsyncProxyCreator.create(sync, ListenableFutureAsync.class, executor, false);
         final ObservableAsync observableAsync = AsyncProxyCreator.create(sync, ObservableAsync.class, executor, false);
 
         executorServiceHolder.set(executor);
         syncBeanHolder.set(sync);
         callbackAsyncHolder.set(callbackAsync);
+        futureCallbackAsyncHolder.set(futureCallbackAsync);
         futureAsyncHolder.set(futureAsync);
+        listenableFutureAsyncHolder.set(listenableFutureAsync);
         observableAsyncHolder.set(observableAsync);
     }
 
@@ -47,7 +54,9 @@ public abstract class BasicRunnerTest extends BasicTest {
         executorServiceHolder.remove();
         syncBeanHolder.remove();
         callbackAsyncHolder.remove();
+        futureCallbackAsyncHolder.remove();
         futureAsyncHolder.remove();
+        listenableFutureAsyncHolder.remove();
         observableAsyncHolder.remove();
     }
 
@@ -64,8 +73,16 @@ public abstract class BasicRunnerTest extends BasicTest {
         return callbackAsyncHolder.get();
     }
 
+    protected FutureCallbackAsync getFutureCallbackAsync() {
+        return futureCallbackAsyncHolder.get();
+    }
+
     protected FutureAsync getFutureAsync() {
         return futureAsyncHolder.get();
+    }
+
+    protected ListenableFutureAsync getListenableFutureAsync() {
+        return listenableFutureAsyncHolder.get();
     }
 
     protected ObservableAsync getObservableAsync() {

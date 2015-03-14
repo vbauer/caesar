@@ -1,10 +1,12 @@
-package com.github.vbauer.caesar.runner;
+package com.github.vbauer.caesar.runner.impl.base;
 
+import com.github.vbauer.caesar.runner.AsyncMethodRunner;
 import com.github.vbauer.caesar.runner.task.SimpleInvokeTask;
 import com.github.vbauer.caesar.util.ReflectionUtils;
 
 import java.lang.reflect.Method;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
 /**
@@ -27,7 +29,7 @@ public abstract class AbstractAsyncMethodRunner implements AsyncMethodRunner {
         return new SimpleInvokeTask<T>(origin, syncMethod, args);
     }
 
-    public Object wrapResultFuture(final Future<?> future) {
+    public Object wrapResultFuture(final Future<?> future, final ExecutorService executor) {
         return future;
     }
 

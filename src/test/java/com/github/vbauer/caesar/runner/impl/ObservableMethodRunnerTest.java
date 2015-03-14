@@ -1,4 +1,4 @@
-package com.github.vbauer.caesar.runner;
+package com.github.vbauer.caesar.runner.impl;
 
 import com.github.vbauer.caesar.basic.BasicRunnerTest;
 import com.github.vbauer.caesar.exception.MissedSyncMethodException;

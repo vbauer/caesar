@@ -12,9 +12,12 @@ import java.util.Collection;
 public final class AsyncMethodRunnerFactory {
 
     public static final String PACKAGE_NAME = "com.github.vbauer.caesar.runner.impl";
+
     public static final String[] CLASS_NAMES = {
         "AsyncCallbackMethodRunner",
         "FutureMethodRunner",
+        "FutureCallbackMethodRunner",
+        "ListenableFutureMethodRunner",
         "ObservableMethodRunner",
     };
     

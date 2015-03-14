@@ -1,26 +1,27 @@
 package com.github.vbauer.caesar.runner.impl;
 
 import com.github.vbauer.caesar.runner.impl.base.AbstractReturnMethodRunner;
-import rx.Observable;
+import com.google.common.util.concurrent.JdkFutureAdapters;
+import com.google.common.util.concurrent.ListenableFuture;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
 /**
- * @author Vladislav Bauer 
+ * @author Vladislav Bauer
  */
 
 @SuppressWarnings("all")
-public class ObservableMethodRunner extends AbstractReturnMethodRunner {
+public class ListenableFutureMethodRunner extends AbstractReturnMethodRunner {
 
     @Override
     public Object wrapResultFuture(final Future<?> future, final ExecutorService executor) {
-        return Observable.from(future);
+        return JdkFutureAdapters.listenInPoolThread(future, executor);
     }
 
     @Override
     protected Class<?> getReturnClass() {
-        return Observable.class;
+        return ListenableFuture.class;
     }
 
 }

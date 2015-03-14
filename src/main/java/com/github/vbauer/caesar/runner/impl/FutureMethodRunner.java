@@ -1,9 +1,7 @@
 package com.github.vbauer.caesar.runner.impl;
 
-import com.github.vbauer.caesar.runner.AbstractAsyncMethodRunner;
-import com.github.vbauer.caesar.util.ReflectionUtils;
+import com.github.vbauer.caesar.runner.impl.base.AbstractReturnMethodRunner;
 
-import java.lang.reflect.Method;
 import java.util.concurrent.Future;
 
 /**
@@ -11,15 +9,11 @@ import java.util.concurrent.Future;
  */
 
 @SuppressWarnings("all")
-public class FutureMethodRunner extends AbstractAsyncMethodRunner {
+public class FutureMethodRunner extends AbstractReturnMethodRunner {
 
     @Override
-    protected Method findSyncMethod(
-        final Class<?> targetClass, final String methodName,
-        final Class<?> returnType, final Class<?>[] parameterTypes
-    ) {
-        return (Future.class == returnType)
-            ? ReflectionUtils.findDeclaredMethod(targetClass, methodName, parameterTypes) : null;
+    protected Class<?> getReturnClass() {
+        return Future.class;
     }
 
 }

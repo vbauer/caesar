@@ -2,6 +2,7 @@ package com.github.vbauer.caesar.runner;
 
 import java.lang.reflect.Method;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
 /**
@@ -14,6 +15,6 @@ public interface AsyncMethodRunner {
 
     <T> Callable<T> createCall(Object origin, Method syncMethod, Object[] args);
 
-    Object wrapResultFuture(Future<?> future);
+    Object wrapResultFuture(Future<?> future, ExecutorService executor);
 
 }

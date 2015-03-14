@@ -1,6 +1,7 @@
-package com.github.vbauer.caesar.runner;
+package com.github.vbauer.caesar.runner.impl;
 
 import com.github.vbauer.caesar.basic.BasicRunnerTest;
+import com.github.vbauer.caesar.basic.Consumer;
 import com.github.vbauer.caesar.callback.AsyncCallback;
 import com.github.vbauer.caesar.callback.AsyncCallbackAdapter;
 import com.github.vbauer.caesar.exception.MissedSyncMethodException;
@@ -120,17 +121,6 @@ public class AsyncCallbackMethodRunnerTest extends BasicRunnerTest {
                 Assert.assertNull(result);
             }
         };
-    }
-
-
-    /**
-     * @author Vladislav Bauer
-     * @param <T> class type
-     */
-    private interface Consumer<T> {
-
-        void set(T input);
-
     }
 
 }

@@ -63,7 +63,7 @@ public final class AsyncInvocationHandler implements InvocationHandler {
         try {
             final Callable<Object> task = runner.createCall(origin, syncMethod, args);
             final Future<Object> future = executor.submit(task);
-            return runner.wrapResultFuture(future);
+            return runner.wrapResultFuture(future, executor);
         } finally {
             syncMethod.setAccessible(methodAccessible);
         }
