@@ -13,12 +13,18 @@ public final class AsyncMethodRunnerFactory {
 
     public static final String PACKAGE_NAME = "com.github.vbauer.caesar.runner.impl";
 
+    /**
+     * Class names of method runners.
+     *
+     * IMPORTANT:
+     * This classes must be listed in the right order: from more-specific to less-specific classes.
+     */
     public static final String[] CLASS_NAMES = {
-        "AsyncCallbackMethodRunner",
-        "FutureMethodRunner",
-        "FutureCallbackMethodRunner",
-        "ListenableFutureMethodRunner",
         "ObservableMethodRunner",
+        "ListenableFutureMethodRunner",
+        "FutureCallbackMethodRunner",
+        "FutureMethodRunner",
+        "AsyncCallbackMethodRunner",
     };
     
 
