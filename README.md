@@ -20,8 +20,9 @@ Caesar will help you to solve these problems.
 
 * Flexible describing of method signatures:
     * using standard Java [Future](http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Future.html)
-    * or using [RxJava](https://github.com/ReactiveX/RxJava) [Observable](https://github.com/ReactiveX/RxJava/wiki/Observable)
-    * or using custom [AsyncCallback](src/main/java/com/github/vbauer/caesar/callback/AsyncCallback.java) / [AsyncCallbackAdapter](src/main/java/com/github/vbauer/caesar/callback/AsyncCallbackAdapter.java)
+    * or using [RxJava](https://github.com/ReactiveX/RxJava) ([Observable](https://github.com/ReactiveX/RxJava/wiki/Observable))
+    * or using [Guava](https://github.com/google/guava) ([ListenableFuture](https://github.com/google/guava/blob/master/guava/src/com/google/common/util/concurrent/ListenableFuture.java), [FutureCallback](https://github.com/google/guava/blob/master/guava/src/com/google/common/util/concurrent/FutureCallback.java), [FutureCallbackAdapter](src/main/java/com/github/vbauer/caesar/callback/FutureCallbackAdapter.java))
+    * or using custom callbacks ([AsyncCallback](src/main/java/com/github/vbauer/caesar/callback/AsyncCallback.java), [AsyncCallbackAdapter](src/main/java/com/github/vbauer/caesar/callback/AsyncCallbackAdapter.java))
 * Small library size with zero dependencies
 * Compact and very simple API
 * Compatibility:
@@ -116,13 +117,15 @@ public class Sync {
 
 First of all, we need to create an async-interface for this bean:
 ```java
-// IMPORTANT: It is just an example.
-// No needs to write all methods. Choose the most appropriate way for you.
-// First 2 methods could not be presented at the same time in the real code.
+// IMPORTANT: It is just an example. Choose the most appropriate way for you.
+// All methods could not be presented at the same time in the real code.
 public interface Async {
 
     // Future<T> will be the new return type.
     Future<String> hello(String name);
+
+    // Future<T> will be the new return type.
+    ListenableFuture<String> hello(String name);
 
     // Observable<T> will be the new return type.
     Observable<String> hello(String name);
@@ -146,17 +149,33 @@ That's all. Now you can use your bean asynchronously. All methods will be invoke
 final Future future = asyncBean.hello("John");
 final String text = future.get(); // text is "Hello, John"
 
+// Retrieve result using ListenableFuture:
+final ListenableFuture listenableFuture = asyncBean.hello("George");
+final String text = listenableFuture.get(); // text is "Hello, George"
+
 // Retrieve result using RxJava and Observable:
 final Observable<String> observable = asyncBean.hello("Paul");
 final String text = observable.toBlocking().first(); // text is "Hello, Paul"
 
-// Retrieve result using callback:
+// Retrieve result using custom callback:
 asyncBean.hello(new AsyncCallbackAdapter<String>() {
      @Override
      public void onSuccess(final String text) {
          // text is "Hello, Ringo"
      }
 }, "Ringo");
+
+// Retrieve result using custom callback:
+asyncBean.hello(new FutureCallback<String>() {
+    @Override
+    public void onSuccess(final String text) {
+        // text is "Hello, guys"
+    }
+    @Override
+    public void onFailure(final Throwable t) {
+        // it will not be executed
+    }
+}, "guys");
 ```
 
 
