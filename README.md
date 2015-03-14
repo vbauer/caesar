@@ -41,7 +41,7 @@ Maven:
 <dependency>
     <groupId>com.github.vbauer</groupId>
     <artifactId>caesar</artifactId>
-    <version>1.2.0</version>
+    <version>1.3.0</version>
 </dependency>
 ```
 
@@ -54,7 +54,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.vbauer:caesar:1.2.0'
+    compile 'com.github.vbauer:caesar:1.3.0'
 }
 ```
 
@@ -127,11 +127,14 @@ public interface Async {
     // Future<T> will be the new return type.
     ListenableFuture<String> hello(String name);
 
-    // Observable<T> will be the new return type.
+    // Observable<T> will be also the new return type.
     Observable<String> hello(String name);
 
     // AsyncCallback<T> should be added as the first parameter.
     void hello(AsyncCallback<String> callback, String name);
+
+    // FutureCallback<T> should be also added as the first parameter.
+    void hello(FutureCallback<String> callback, String name);
 
 }
 ```
