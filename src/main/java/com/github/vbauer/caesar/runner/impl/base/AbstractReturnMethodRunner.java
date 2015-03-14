@@ -12,8 +12,8 @@ public abstract class AbstractReturnMethodRunner extends AbstractAsyncMethodRunn
 
     @Override
     protected Method findSyncMethod(
-            final Class<?> targetClass, final String methodName,
-            final Class<?> returnType, final Class<?>[] parameterTypes
+        final Class<?> targetClass, final String methodName,
+        final Class<?> returnType, final Class<?>[] parameterTypes
     ) {
         final Class<?> returnClass = getReturnClass();
         return (returnClass == returnType)
