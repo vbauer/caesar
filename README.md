@@ -168,7 +168,7 @@ asyncBean.hello(new AsyncCallbackAdapter<String>() {
      }
 }, "Ringo");
 
-// Retrieve result using custom callback:
+// Retrieve result using FutureCallback:
 asyncBean.hello(new FutureCallback<String>() {
     @Override
     public void onSuccess(final String text) {
