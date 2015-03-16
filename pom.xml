@@ -25,6 +25,11 @@
         <url>https://github.com/vbauer/caesar/issues</url>
     </issueManagement>
 
+    <ciManagement>
+        <system>Travis</system>
+        <url>https://travis-ci.org/vbauer/caesar</url>
+    </ciManagement>
+
     <developers>
         <developer>
             <id>vbauer</id>
