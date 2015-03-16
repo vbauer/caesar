@@ -20,6 +20,11 @@
         </license>
     </licenses>
 
+    <issueManagement>
+        <system>GitHub Issues</system>
+        <url>https://github.com/vbauer/caesar</url>
+    </issueManagement>
+
     <developers>
         <developer>
             <id>vbauer</id>
