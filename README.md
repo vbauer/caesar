@@ -184,6 +184,7 @@ asyncBean.hello(new FutureCallback<String>() {
 
 ## Might also like
 
+* [jackdaw](https://github.com/vbauer/jackdaw) - Java Annotation Processor which allows to simplify development.
 * [houdini](https://github.com/vbauer/houdini) - Type conversion system for Spring framework.
 * [herald](https://github.com/vbauer/herald) - Logging annotation for Spring framework.
 * [commons-vfs2-cifs](https://github.com/vbauer/commons-vfs2-cifs) - SMB/CIFS provider for Commons VFS.
