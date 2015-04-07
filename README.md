@@ -26,7 +26,7 @@ Caesar will help you to solve these problems.
 * Small library size with zero dependencies
 * Compact and very simple API
 * Compatibility:
-    * Java 5+
+    * Java 6+
     * Android
 
 ## Setup
