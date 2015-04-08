@@ -24,4 +24,9 @@ public class Sync {
         throw new UnsupportedOperationException();
     }
 
+    public Boolean timeout() throws InterruptedException {
+        Thread.sleep(10000);
+        return true;
+    }
+
 }

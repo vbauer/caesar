@@ -1,5 +1,6 @@
 package com.github.vbauer.caesar.bean;
 
+import com.github.vbauer.caesar.annotation.Timeout;
 import rx.Observable;
 
 /**
@@ -19,5 +20,8 @@ public interface ObservableAsync {
     Observable<Void> exception();
 
     Observable<Boolean> methodWithoutSyncImpl();
+
+    @Timeout(1)
+    Observable<Boolean> timeout();
 
 }

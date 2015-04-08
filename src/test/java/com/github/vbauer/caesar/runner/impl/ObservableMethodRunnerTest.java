@@ -6,11 +6,20 @@ import org.junit.Assert;
 import org.junit.Test;
 import rx.Observable;
 
+import java.util.concurrent.CancellationException;
+
 /**
  * @author Vladislav Bauer
  */
 
 public class ObservableMethodRunnerTest extends BasicRunnerTest {
+
+    @Test(expected = CancellationException.class)
+    public void testTimeout() throws Throwable {
+        final Observable<Boolean> observable = getObservableAsync().timeout();
+        Assert.assertNotNull(observable);
+        Assert.fail(String.valueOf(observable.toBlocking().first()));
+    }
 
     @Test
     public void testWithoutResult() throws Throwable {

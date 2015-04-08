@@ -31,7 +31,7 @@ public abstract class BasicRunnerTest extends BasicTest {
 
     @Before
     public final void before() {
-        final ExecutorService executor = Executors.newFixedThreadPool(5);
+        final ExecutorService executor = Executors.newScheduledThreadPool(5);
         final Sync sync = new Sync();
         final CallbackAsync callbackAsync = AsyncProxyCreator.create(sync, CallbackAsync.class, executor, false);
         final FutureCallbackAsync futureCallbackAsync = AsyncProxyCreator.create(sync, FutureCallbackAsync.class, executor, false);

@@ -18,12 +18,31 @@ import java.util.concurrent.atomic.AtomicReference;
 public class AsyncCallbackMethodRunnerTest extends BasicRunnerTest {
 
     @Test
+    public void testTimeout() throws Throwable {
+        check(new Consumer<AsyncCallback<Boolean>>() {
+            @Override
+            public void set(final AsyncCallback<Boolean> callback) {
+                getCallbackAsync().timeout(callback);
+            }
+        }, new AsyncCallback<Boolean>() {
+            @Override
+            public void onSuccess(final Boolean result) {
+                Assert.fail();
+            }
+            @Override
+            public void onFailure(final Throwable caught) {
+                Assert.assertNull(caught);
+            }
+        }, false);
+    }
+
+    @Test
     public void testWithoutResult() throws Throwable {
         check(new Consumer<AsyncCallback<Void>>() {
             public void set(final AsyncCallback<Void> callback) {
                 getCallbackAsync().empty(callback);
             }
-        }, notNullResultCallback());
+        }, notNullResultCallback(), true);
     }
 
     @Test
@@ -32,7 +51,7 @@ public class AsyncCallbackMethodRunnerTest extends BasicRunnerTest {
             public void set(final AsyncCallback<Void> callback) {
                 getCallbackAsync().emptyHello(callback, PARAMETER);
             }
-        }, notNullResultCallback());
+        }, notNullResultCallback(), true);
     }
 
     @Test
@@ -46,7 +65,7 @@ public class AsyncCallbackMethodRunnerTest extends BasicRunnerTest {
             public void onSuccess(final String result) {
                 Assert.assertEquals(getSync().hello(PARAMETER), result);
             }
-        });
+        }, true);
     }
 
     @Test
@@ -60,7 +79,7 @@ public class AsyncCallbackMethodRunnerTest extends BasicRunnerTest {
             public void onSuccess(final String result) {
                 Assert.assertEquals(getSync().hello(PARAMETER, PARAMETER), result);
             }
-        });
+        }, true);
     }
 
     @Test(expected = UnsupportedOperationException.class)
@@ -69,7 +88,7 @@ public class AsyncCallbackMethodRunnerTest extends BasicRunnerTest {
             public void set(final AsyncCallback<Void> callback) {
                 getCallbackAsync().exception(callback);
             }
-        }, new AsyncCallbackAdapter<Void>());
+        }, new AsyncCallbackAdapter<Void>(), true);
     }
 
     @Test(expected = MissedSyncMethodException.class)
@@ -80,7 +99,8 @@ public class AsyncCallbackMethodRunnerTest extends BasicRunnerTest {
 
 
     private <T> void check(
-        final Consumer<AsyncCallback<T>> operation, final AsyncCallback<T> callback
+        final Consumer<AsyncCallback<T>> operation, final AsyncCallback<T> callback,
+        final boolean failOnError
     ) throws Throwable {
         final AtomicReference<Throwable> error = new AtomicReference<Throwable>();
         final Semaphore semaphore = new Semaphore(1, true);
@@ -106,11 +126,13 @@ public class AsyncCallbackMethodRunnerTest extends BasicRunnerTest {
         };
 
         operation.set(semaphoreCallback);
-
         semaphore.acquire();
-        final Throwable throwable = error.get();
-        if (throwable != null) {
-            throw throwable;
+
+        if (failOnError) {
+            final Throwable throwable = error.get();
+            if (throwable != null) {
+                throw throwable;
+            }
         }
     }
 

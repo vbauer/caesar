@@ -25,6 +25,7 @@ Caesar will help you to solve these problems.
     * or using custom callbacks ([AsyncCallback](src/main/java/com/github/vbauer/caesar/callback/AsyncCallback.java), [AsyncCallbackAdapter](src/main/java/com/github/vbauer/caesar/callback/AsyncCallbackAdapter.java))
 * Small library size with zero dependencies
 * Compact and very simple API
+* Configurable timeouts
 * Compatibility:
     * Java 6+
     * Android
@@ -180,6 +181,32 @@ asyncBean.hello(new FutureCallback<String>() {
     }
 }, "guys");
 ```
+
+
+## @Timeout
+
+Sometimes it is useful to setup timeout value to cancel operation (ex: REST API call which takes a lot of time).
+You can use `@Timeout` annotation to do it (cancel operation after 3 seconds):
+
+```java
+public interface Async {
+
+    @Timeout(value = 3, unit = TimeUnit.SECONDS)
+    Future<String> hello(String name);
+
+```
+
+It is also possible to configure timeouts for all methods of async-proxy putting annotation on class:
+
+```java
+@Timeout(5000)
+public interface Async {
+    Future<Long> foo1();
+    Future<Long> foo2();
+}
+```
+
+**IMPORTANT:** `ScheduledExecutorService` should be used to switch on this feature.
 
 
 ## Might also like

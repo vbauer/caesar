@@ -1,5 +1,6 @@
 package com.github.vbauer.caesar.proxy;
 
+import com.github.vbauer.caesar.annotation.Timeout;
 import com.github.vbauer.caesar.exception.MissedSyncMethodException;
 import com.github.vbauer.caesar.runner.AsyncMethodRunner;
 import com.github.vbauer.caesar.runner.AsyncMethodRunnerFactory;
@@ -7,9 +8,7 @@ import com.github.vbauer.caesar.runner.AsyncMethodRunnerFactory;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.Collection;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 
 /**
  * @author Vladislav Bauer
@@ -37,10 +36,10 @@ public final class AsyncInvocationHandler implements InvocationHandler {
 
     public Object invoke(final Object proxy, final Method method, final Object[] args) {
         final AsyncMethodRunner runner = findAsyncMethodRunner(method);
-        if (runner != null) {
-            return runAsyncMethod(runner, method, args);
+        if (runner == null) {
+            throw new MissedSyncMethodException(method, args);
         }
-        throw new MissedSyncMethodException(method, args);
+        return runAsyncMethod(runner, method, args);
     }
 
 
@@ -57,16 +56,56 @@ public final class AsyncInvocationHandler implements InvocationHandler {
 
     private Object runAsyncMethod(final AsyncMethodRunner runner, final Method method, final Object[] args) {
         final Method syncMethod = runner.findSyncMethod(origin, method);
+        if (syncMethod == null) {
+            throw new MissedSyncMethodException(method, args);
+        }
+
         final boolean methodAccessible = syncMethod.isAccessible();
         syncMethod.setAccessible(methodAccessible);
 
         try {
             final Callable<Object> task = runner.createCall(origin, syncMethod, args);
-            final Future<Object> future = executor.submit(task);
+            final Timeout timeout = getTimeout(method);
+            final Future<Object> future = schedule(task, timeout);
             return runner.wrapResultFuture(future, executor);
         } finally {
             syncMethod.setAccessible(methodAccessible);
         }
+    }
+
+    private Timeout getTimeout(final Method asyncMethod) {
+        final Timeout annotation = asyncMethod.getAnnotation(Timeout.class);
+        if (annotation != null) {
+            return annotation;
+        }
+
+        final Class<?> originClass = origin.getClass();
+        return originClass.getAnnotation(Timeout.class);
+    }
+
+    private Future<Object> schedule(final Callable<Object> task, final Timeout timeout) {
+        final Future<Object> future = executor.submit(task);
+
+        if (executor instanceof ScheduledExecutorService && timeout != null) {
+            final long value = timeout.value();
+            if (value > 0) {
+                final TimeUnit unit = timeout.unit();
+                final Runnable cancelOperation = createCancelOperation(future);
+                final ScheduledExecutorService scheduler = (ScheduledExecutorService) executor;
+                scheduler.schedule(cancelOperation, value, unit);
+            }
+        }
+
+        return future;
+    }
+
+    private Runnable createCancelOperation(final Future<Object> future) {
+        return new Runnable() {
+            @Override
+            public void run() {
+                future.cancel(true);
+            }
+        };
     }
 
 }

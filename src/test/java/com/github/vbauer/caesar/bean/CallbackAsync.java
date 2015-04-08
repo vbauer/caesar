@@ -1,5 +1,6 @@
 package com.github.vbauer.caesar.bean;
 
+import com.github.vbauer.caesar.annotation.Timeout;
 import com.github.vbauer.caesar.callback.AsyncCallback;
 
 /**
@@ -19,5 +20,8 @@ public interface CallbackAsync {
     void exception(AsyncCallback<Void> callback);
 
     void methodWithoutSyncImpl(AsyncCallback<Boolean> callback);
+
+    @Timeout(1)
+    void timeout(AsyncCallback<Boolean> callback);
 
 }

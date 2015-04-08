@@ -6,6 +6,7 @@ import com.google.common.util.concurrent.ListenableFuture;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -13,6 +14,13 @@ import java.util.concurrent.ExecutionException;
  */
 
 public class ListenableFutureMethodRunnerTest extends BasicRunnerTest {
+
+    @Test(expected = CancellationException.class)
+    public void testTimeout() throws Throwable {
+        final ListenableFuture<Boolean> future = getListenableFutureAsync().timeout();
+        Assert.assertNotNull(future);
+        Assert.fail(String.valueOf(future.get()));
+    }
 
     @Test
     public void testWithoutResult() throws Throwable {

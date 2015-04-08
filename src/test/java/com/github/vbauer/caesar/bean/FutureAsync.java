@@ -1,5 +1,7 @@
 package com.github.vbauer.caesar.bean;
 
+import com.github.vbauer.caesar.annotation.Timeout;
+
 import java.util.concurrent.Future;
 
 /**
@@ -20,4 +22,6 @@ public interface FutureAsync {
 
     Future<Boolean> methodWithoutSyncImpl();
 
+    @Timeout(1)
+    Future<Boolean> timeout();
 }

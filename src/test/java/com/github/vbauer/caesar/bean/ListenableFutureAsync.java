@@ -1,5 +1,6 @@
 package com.github.vbauer.caesar.bean;
 
+import com.github.vbauer.caesar.annotation.Timeout;
 import com.google.common.util.concurrent.ListenableFuture;
 
 /**
@@ -19,5 +20,8 @@ public interface ListenableFutureAsync {
     ListenableFuture<Void> exception();
 
     ListenableFuture<Boolean> methodWithoutSyncImpl();
+
+    @Timeout(1)
+    ListenableFuture<Boolean> timeout();
 
 }

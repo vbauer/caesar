@@ -1,5 +1,6 @@
 package com.github.vbauer.caesar.bean;
 
+import com.github.vbauer.caesar.annotation.Timeout;
 import com.google.common.util.concurrent.FutureCallback;
 
 /**
@@ -19,5 +20,8 @@ public interface FutureCallbackAsync {
     void exception(FutureCallback<Void> callback);
 
     void methodWithoutSyncImpl(FutureCallback<Boolean> callback);
+
+    @Timeout(1)
+    void timeout(FutureCallback<Boolean> callback);
 
 }
