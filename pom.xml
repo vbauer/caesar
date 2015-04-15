@@ -51,20 +51,20 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.6</java.version>
 
-        <rxjava.version>1.0.7</rxjava.version>
+        <rxjava.version>1.0.9</rxjava.version>
         <guava.version>18.0</guava.version>
         
         <junit.version>4.12</junit.version>
-        <hibernate.version>3.5.4-Final</hibernate.version>
+        <hibernate.version>4.3.8.Final</hibernate.version>
 
-        <maven.compiler.plugin.version>3.2</maven.compiler.plugin.version>
+        <maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
         <maven.source.plugin.version>2.4</maven.source.plugin.version>
         <maven.surefire.plugin.version>2.18.1</maven.surefire.plugin.version>
-        <maven.checkstyle.plugin.version>2.14</maven.checkstyle.plugin.version>
+        <maven.checkstyle.plugin.version>2.15</maven.checkstyle.plugin.version>
         <maven.pmd.plugin.version>3.4</maven.pmd.plugin.version>
         <maven.animal.sniffer.plugin.version>1.14</maven.animal.sniffer.plugin.version>
-        <maven.cobertura.plugin.version>2.6</maven.cobertura.plugin.version>
-        <maven.coveralls.plugin.version>3.0.1</maven.coveralls.plugin.version>
+        <maven.cobertura.plugin.version>2.7</maven.cobertura.plugin.version>
+        <maven.coveralls.plugin.version>3.1.0</maven.coveralls.plugin.version>
     </properties>
 
     <dependencies>
