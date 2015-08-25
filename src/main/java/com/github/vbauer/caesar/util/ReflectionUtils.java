@@ -9,6 +9,7 @@ import java.util.List;
  * @author Vladislav Bauer
  */
 
+@SuppressWarnings("unchecked")
 public final class ReflectionUtils {
 
     public static final String PACKAGE_SEPARATOR = ".";
@@ -19,7 +20,6 @@ public final class ReflectionUtils {
     }
 
 
-    @SuppressWarnings("unchecked")
     public static <T> Class<T> getClassWithoutProxies(final Object object) {
         try {
             // XXX: Use HibernateProxyHelper to un-proxy object and get the original class.
@@ -28,11 +28,14 @@ public final class ReflectionUtils {
 
             return (Class<T>) method.invoke(null, object);
         } catch (final Exception ex) {
-            return object != null ? (Class<T>) object.getClass() : null;
+            return getClassSafe(object);
         }
     }
 
-    @SuppressWarnings("unchecked")
+    public static <T> Class<T> getClassSafe(final Object object) {
+        return object != null ? (Class<T>) object.getClass() : null;
+    }
+
     public static <T> T createObject(final String className) {
         try {
             final Class<?> clazz = Class.forName(className);

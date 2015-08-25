@@ -2,17 +2,21 @@ package com.github.vbauer.caesar.util;
 
 import com.github.vbauer.caesar.basic.BasicTest;
 import com.github.vbauer.caesar.runner.AsyncMethodRunnerFactory;
+import com.google.common.collect.Lists;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.*;
 
 /**
  * @author Vladislav Bauer
  */
 
 public class ReflectionUtilsTest extends BasicTest {
+
+    private static final String CLASS_OBJECT = "java.lang.Object";
+    private static final String CLASS_STRING = "java.lang.String";
+
 
     @Test
     public void testConstructorContract() throws Exception {
@@ -21,18 +25,24 @@ public class ReflectionUtilsTest extends BasicTest {
 
     @Test
     public void testCreateObject() {
-        Assert.assertEquals(Object.class, ReflectionUtils.createObject("java.lang.Object").getClass());
+        Assert.assertEquals(
+            Object.class,
+            ReflectionUtils.getClassSafe(ReflectionUtils.createObject(CLASS_OBJECT))
+        );
         Assert.assertEquals(null, ReflectionUtils.createObject(null));
     }
 
     @Test
     public void testCreateObjects() {
-        final Collection<Object> objects =
-            ReflectionUtils.createObjects(Arrays.asList("java.lang.Object"));
+        final List<Object> objects = Lists.newArrayList(
+            ReflectionUtils.createObjects(
+                Arrays.asList(CLASS_OBJECT, CLASS_STRING)
+            )
+        );
         
-        final Object firstElement = objects.iterator().next();
-        Assert.assertEquals(Object.class, firstElement.getClass());
-        Assert.assertEquals(1, objects.size());
+        Assert.assertEquals(Object.class, objects.get(0).getClass());
+        Assert.assertEquals(String.class, objects.get(1).getClass());
+        Assert.assertEquals(2, objects.size());
     }
 
     @Test
@@ -48,5 +58,13 @@ public class ReflectionUtilsTest extends BasicTest {
             result.iterator().next()
         );
     }
-    
+
+    @Test
+    public void testGetClassSafe() {
+        Assert.assertNull(ReflectionUtils.getClassSafe(null));
+        Assert.assertEquals(
+            String.class, ReflectionUtils.getClassSafe(ReflectionUtils.PACKAGE_SEPARATOR)
+        );
+    }
+
 }
