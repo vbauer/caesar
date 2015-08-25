@@ -27,7 +27,7 @@ Caesar will help you to solve these problems.
 * Compact and very simple API
 * Configurable timeouts
 * Compatibility:
-    * Java 6+
+    * Java 7+
     * Android
 
 ## Setup
