@@ -49,8 +49,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <source.java.version>1.6</source.java.version>
-        <target.java.version>1.7</target.java.version>
+        <java.version>1.7</java.version>
 
         <rxjava.version>1.0.14</rxjava.version>
         <guava.version>18.0</guava.version>
@@ -123,8 +122,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven.compiler.plugin.version}</version>
                 <configuration>
-                    <source>${source.java.version}</source>
-                    <target>${target.java.version}</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <optimize>true</optimize>
                 </configuration>
