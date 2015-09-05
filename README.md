@@ -96,7 +96,9 @@ To make correct mapping between object and async-proxy, it is necessary to perfo
 Asynchronous proxy method signature must match the signature of the object method, except several points:
 
 * To use **Future** as result value, return class must be `Future<T>`
-* To use **Guava**, return class must be `ListenableFuture<T>` 
+* To use **Guava**:
+    * return class should be `ListenableFuture<T>`
+    * or add new parameter `FutureCallback<T>` at the first place of the method signature and change result type to `void`
 * To use **RxJava**, return class must be `Observable<T>`
 * To use **AsyncCallback**, you need to:
     * add new parameter `AsyncCallback<T>` at the first place of the method signature
