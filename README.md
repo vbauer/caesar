@@ -96,10 +96,14 @@ To make correct mapping between object and async-proxy, it is necessary to perfo
 Asynchronous proxy method signature must match the signature of the object method, except several points:
 
 * To use **Future** as result value, return class must be `Future<T>`
+* To use **Guava**, return class must be `ListenableFuture<T>` 
 * To use **RxJava**, return class must be `Observable<T>`
 * To use **AsyncCallback**, you need to:
     * add new parameter `AsyncCallback<T>` at the first place of the method signature
     * change result type to `void`
+
+If this conventions are not complied, than the corresponding sync-method with the same signature should be invoked.
+It will be still invoked in the separate thread to allow to use `@Timeout` annotation.
 
 
 ## Example
