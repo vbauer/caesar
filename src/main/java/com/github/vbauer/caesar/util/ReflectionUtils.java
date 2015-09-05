@@ -95,8 +95,8 @@ public final class ReflectionUtils {
         final String name2 = m2.getName();
 
         return name1.equals(name2)
-           && returnType1 == returnType2
-           && Arrays.equals(parameterTypes1, parameterTypes2);
+            && returnType1 == returnType2
+            && Arrays.equals(parameterTypes1, parameterTypes2);
     }
 
 }
