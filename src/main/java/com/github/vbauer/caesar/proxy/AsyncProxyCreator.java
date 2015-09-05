@@ -48,9 +48,11 @@ public final class AsyncProxyCreator {
         final Method[] methods = targetClass.getDeclaredMethods();
 
         for (final Method method : methods) {
-            final AsyncMethodRunner runner = handler.findAsyncMethodRunner(method);
-            if (runner == null) {
-                throw new MissedSyncMethodException(method);
+            if (!ReflectionUtils.isMethodFromObject(method)) {
+                final AsyncMethodRunner runner = handler.findAsyncMethodRunner(method);
+                if (runner == null) {
+                    throw new MissedSyncMethodException(method);
+                }
             }
         }
 

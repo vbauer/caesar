@@ -1,6 +1,9 @@
 package com.github.vbauer.caesar.proxy;
 
 import com.github.vbauer.caesar.basic.BasicTest;
+import com.github.vbauer.caesar.bean.CallbackAsync;
+import com.github.vbauer.caesar.bean.SimpleAsync;
+import com.github.vbauer.caesar.bean.SimpleSync;
 import com.github.vbauer.caesar.bean.Sync;
 import com.github.vbauer.caesar.exception.MissedSyncMethodException;
 import org.junit.AfterClass;
@@ -40,6 +43,16 @@ public class AsyncProxyCreatorTest extends BasicTest {
     @Test(expected = MissedSyncMethodException.class)
     public void testIncorrectProxy() throws Throwable {
         Assert.fail(String.valueOf(AsyncProxyCreator.create(new Sync(), List.class, executorService)));
+    }
+
+    @Test(expected = MissedSyncMethodException.class)
+    public void testBadProxy() throws Throwable {
+        Assert.fail(String.valueOf(AsyncProxyCreator.create(new Sync(), CallbackAsync.class, executorService)));
+    }
+
+    @Test
+    public void testProxy() throws Throwable {
+        Assert.assertNotNull(AsyncProxyCreator.create(new SimpleSync(), SimpleAsync.class, executorService));
     }
 
 }

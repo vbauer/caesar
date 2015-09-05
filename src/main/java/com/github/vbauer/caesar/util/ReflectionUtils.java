@@ -2,6 +2,7 @@ package com.github.vbauer.caesar.util;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -73,5 +74,29 @@ public final class ReflectionUtils {
             return null;
         }
     }
-    
+
+    public static boolean isMethodFromObject(final Method method) {
+        final Method[] methods = Object.class.getDeclaredMethods();
+        for (final Method m : methods) {
+            if (isSameMethods(method, m)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isSameMethods(final Method m1, final Method m2) {
+        final Class<?> returnType1 = m1.getReturnType();
+        final Class<?>[] parameterTypes1 = m1.getParameterTypes();
+        final String name1 = m1.getName();
+
+        final Class<?> returnType2 = m2.getReturnType();
+        final Class<?>[] parameterTypes2 = m2.getParameterTypes();
+        final String name2 = m2.getName();
+
+        return name1.equals(name2)
+           && returnType1 == returnType2
+           && Arrays.equals(parameterTypes1, parameterTypes2);
+    }
+
 }
