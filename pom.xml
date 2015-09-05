@@ -55,7 +55,7 @@
         <guava.version>18.0</guava.version>
         
         <junit.version>4.12</junit.version>
-        <hibernate.version>5.0.0.Final</hibernate.version>
+        <hibernate.version>5.0.1.Final</hibernate.version>
 
         <maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
         <maven.source.plugin.version>2.4</maven.source.plugin.version>
