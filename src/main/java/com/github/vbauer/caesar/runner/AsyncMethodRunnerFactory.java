@@ -25,6 +25,7 @@ public final class AsyncMethodRunnerFactory {
         "FutureCallbackMethodRunner",
         "FutureMethodRunner",
         "AsyncCallbackMethodRunner",
+        "SyncMethodRunner",
     };
     
 

@@ -21,19 +21,18 @@ import java.util.concurrent.Executors;
 
 public class AsyncProxyCreatorTest extends BasicTest {
 
-    private static ExecutorService executorService;
+    private static final ThreadLocal<ExecutorService> EXECUTOR = new ThreadLocal<>();
 
 
     @BeforeClass
     public static void setUp() {
-        executorService = Executors.newFixedThreadPool(5);
+        EXECUTOR.set(Executors.newFixedThreadPool(5));
     }
 
     @AfterClass
     public static void tearDown() throws Exception {
-        executorService.shutdown();
+        executor().shutdown();
     }
-
 
     @Test
     public void testConstructorContract() throws Exception {
@@ -42,17 +41,37 @@ public class AsyncProxyCreatorTest extends BasicTest {
 
     @Test(expected = MissedSyncMethodException.class)
     public void testIncorrectProxy() throws Throwable {
-        Assert.fail(String.valueOf(AsyncProxyCreator.create(new Sync(), List.class, executorService)));
+        Assert.fail(String.valueOf(AsyncProxyCreator.create(new Sync(), List.class, executor())));
     }
 
     @Test(expected = MissedSyncMethodException.class)
     public void testBadProxy() throws Throwable {
-        Assert.fail(String.valueOf(AsyncProxyCreator.create(new Sync(), CallbackAsync.class, executorService)));
+        Assert.fail(String.valueOf(
+            AsyncProxyCreator.create(new Sync(), CallbackAsync.class, executor())
+        ));
     }
 
     @Test
-    public void testProxy() throws Throwable {
-        Assert.assertNotNull(AsyncProxyCreator.create(new SimpleSync(), SimpleAsync.class, executorService));
+    public void testCorrectProxy() throws Throwable {
+        final SimpleSync bean1 = new SimpleSync(1);
+        final SimpleAsync proxy1 = AsyncProxyCreator.create(bean1, SimpleAsync.class, executor());
+        Assert.assertNotNull(proxy1);
+        Assert.assertEquals(bean1.getId(), (int) proxy1.getId().get());
+
+        final SimpleSync bean2 = new SimpleSync(2);
+        final SimpleAsync proxy2 = AsyncProxyCreator.create(bean2, SimpleAsync.class, executor());
+        Assert.assertNotNull(proxy2);
+        Assert.assertEquals(bean2.getId(), (int) proxy2.getId().get());
+
+        Assert.assertNotEquals(proxy1, proxy2);
+        Assert.assertNotEquals(proxy1.hashCode(), proxy2.hashCode());
+        Assert.assertNotEquals(proxy1.toString(), proxy2.toString());
+        Assert.assertNotNull(proxy1.toString());
+    }
+
+
+    private static ExecutorService executor() {
+        return EXECUTOR.get();
     }
 
 }

@@ -14,12 +14,12 @@ import java.util.concurrent.Future;
 public class ObservableMethodRunner extends AbstractReturnMethodRunner {
 
     @Override
-    public Object wrapResultFuture(final Future<?> future, final ExecutorService executor) {
+    public Object processResultFuture(final Future<?> future, final ExecutorService executor) {
         return Observable.from(future);
     }
 
     @Override
-    protected Class<?> getReturnClass() {
+    protected Class<?> getReturnClass(final Class<?> originReturnType) {
         return Observable.class;
     }
 

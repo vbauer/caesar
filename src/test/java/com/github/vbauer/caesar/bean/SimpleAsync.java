@@ -1,6 +1,6 @@
 package com.github.vbauer.caesar.bean;
 
-import com.github.vbauer.caesar.callback.AsyncCallback;
+import java.util.concurrent.Future;
 
 /**
  * @author Vladislav Bauer
@@ -8,6 +8,6 @@ import com.github.vbauer.caesar.callback.AsyncCallback;
 
 public interface SimpleAsync {
 
-    void hello(AsyncCallback<String> callback, String name);
+    Future<Integer> getId();
 
 }

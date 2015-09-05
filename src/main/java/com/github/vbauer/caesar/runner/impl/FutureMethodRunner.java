@@ -12,7 +12,7 @@ import java.util.concurrent.Future;
 public class FutureMethodRunner extends AbstractReturnMethodRunner {
 
     @Override
-    protected Class<?> getReturnClass() {
+    protected Class<?> getReturnClass(final Class<?> originReturnType) {
         return Future.class;
     }
 

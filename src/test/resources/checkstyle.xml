@@ -55,7 +55,6 @@
         <module name="HideUtilityClassConstructor"/>
         <module name="IllegalImport"/>
         <module name="IllegalInstantiation"/>
-        <module name="IllegalThrows"/>
         <module name="IllegalTokenText"/>
         <module name="IllegalType"/>
         <module name="Indentation"/>
@@ -142,6 +141,7 @@
         <!--<module name="Header"/>-->
         <!--<module name="HiddenField"/>-->
         <!--<module name="IllegalCatch"/>-->
+        <!--<module name="IllegalThrows"/>-->
         <!--<module name="IllegalToken"/>-->
         <!--<module name="ImportControl"/>-->
         <!--<module name="ImportOrder"/>-->

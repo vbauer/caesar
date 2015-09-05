@@ -15,6 +15,6 @@ public interface AsyncMethodRunner {
 
     <T> Callable<T> createCall(Object origin, Method syncMethod, Object[] args);
 
-    Object wrapResultFuture(Future<?> future, ExecutorService executor);
+    Object processResultFuture(Future<?> future, ExecutorService executor) throws Throwable;
 
 }

@@ -34,7 +34,9 @@ public final class AsyncInvocationHandler implements InvocationHandler {
     }
 
 
-    public Object invoke(final Object proxy, final Method method, final Object[] args) {
+    public Object invoke(
+        final Object proxy, final Method method, final Object[] args
+    ) throws Throwable {
         final AsyncMethodRunner runner = findAsyncMethodRunner(method);
         if (runner == null) {
             throw new MissedSyncMethodException(method, args);
@@ -54,7 +56,9 @@ public final class AsyncInvocationHandler implements InvocationHandler {
     }
 
 
-    private Object runAsyncMethod(final AsyncMethodRunner runner, final Method method, final Object[] args) {
+    private Object runAsyncMethod(
+        final AsyncMethodRunner runner, final Method method, final Object[] args
+    ) throws Throwable {
         final Method syncMethod = runner.findSyncMethod(origin, method);
         if (syncMethod == null) {
             throw new MissedSyncMethodException(method, args);
@@ -67,7 +71,7 @@ public final class AsyncInvocationHandler implements InvocationHandler {
             final Callable<Object> task = runner.createCall(origin, syncMethod, args);
             final Timeout timeout = getTimeout(method);
             final Future<Object> future = schedule(task, timeout);
-            return runner.wrapResultFuture(future, executor);
+            return runner.processResultFuture(future, executor);
         } finally {
             syncMethod.setAccessible(methodAccessible);
         }

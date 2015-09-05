@@ -15,12 +15,12 @@ public abstract class AbstractReturnMethodRunner extends AbstractAsyncMethodRunn
         final Class<?> targetClass, final String methodName,
         final Class<?> returnType, final Class<?>[] parameterTypes
     ) {
-        final Class<?> returnClass = getReturnClass();
+        final Class<?> returnClass = getReturnClass(returnType);
         return (returnClass == returnType)
             ? ReflectionUtils.findDeclaredMethod(targetClass, methodName, parameterTypes) : null;
     }
 
 
-    protected abstract Class<?> getReturnClass();
+    protected abstract Class<?> getReturnClass(Class<?> originReturnType);
 
 }

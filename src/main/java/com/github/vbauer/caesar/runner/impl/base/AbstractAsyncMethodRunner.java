@@ -25,11 +25,15 @@ public abstract class AbstractAsyncMethodRunner implements AsyncMethodRunner {
         return findSyncMethod(targetClass, methodName, returnType, parameterTypes);
     }
 
-    public <T> Callable<T> createCall(final Object origin, final Method syncMethod, final Object[] args) {
-        return new SimpleInvokeTask<T>(origin, syncMethod, args);
+    public <T> Callable<T> createCall(
+        final Object origin, final Method syncMethod, final Object[] args
+    ) {
+        return new SimpleInvokeTask<>(origin, syncMethod, args);
     }
 
-    public Object wrapResultFuture(final Future<?> future, final ExecutorService executor) {
+    public Object processResultFuture(
+        final Future<?> future, final ExecutorService executor
+    ) throws Throwable {
         return future;
     }
 
