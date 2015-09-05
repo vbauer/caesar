@@ -47,7 +47,7 @@ public final class ReflectionUtils {
     }
 
     public static <T> Collection<T> createObjects(final Collection<String> classNames) {
-        final List<T> objects = new ArrayList<T>();
+        final List<T> objects = new ArrayList<>();
         for (final String className : classNames) {
             final T object = createObject(className);
             if (object != null) {
@@ -58,7 +58,7 @@ public final class ReflectionUtils {
     }
     
     public static Collection<String> classNames(final String packageName, final Collection<String> classNames) {
-        final List<String> result = new ArrayList<String>();
+        final List<String> result = new ArrayList<>();
         for (final String className : classNames) {
             result.add(packageName + PACKAGE_SEPARATOR + className);
         }
