@@ -102,7 +102,7 @@ public class AsyncCallbackMethodRunnerTest extends BasicRunnerTest {
         final Consumer<AsyncCallback<T>> operation, final AsyncCallback<T> callback,
         final boolean failOnError
     ) throws Throwable {
-        final AtomicReference<Throwable> error = new AtomicReference<Throwable>();
+        final AtomicReference<Throwable> error = new AtomicReference<>();
         final Semaphore semaphore = new Semaphore(1, true);
         semaphore.acquire();
 

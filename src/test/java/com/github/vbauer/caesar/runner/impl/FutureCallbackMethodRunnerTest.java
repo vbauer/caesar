@@ -102,7 +102,7 @@ public class FutureCallbackMethodRunnerTest extends BasicRunnerTest {
         final Consumer<FutureCallback<T>> operation, final FutureCallback<T> callback,
         final boolean failOnError
     ) throws Throwable {
-        final AtomicReference<Throwable> error = new AtomicReference<Throwable>();
+        final AtomicReference<Throwable> error = new AtomicReference<>();
         final Semaphore semaphore = new Semaphore(1, true);
         semaphore.acquire();
 

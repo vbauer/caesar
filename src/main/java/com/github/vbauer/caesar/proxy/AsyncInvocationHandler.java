@@ -60,10 +60,6 @@ public final class AsyncInvocationHandler implements InvocationHandler {
         final AsyncMethodRunner runner, final Method method, final Object[] args
     ) throws Throwable {
         final Method syncMethod = runner.findSyncMethod(origin, method);
-        if (syncMethod == null) {
-            throw new MissedSyncMethodException(method, args);
-        }
-
         final boolean methodAccessible = syncMethod.isAccessible();
         syncMethod.setAccessible(methodAccessible);
 

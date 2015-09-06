@@ -21,13 +21,13 @@ public abstract class BasicRunnerTest extends BasicTest {
 
     protected static final String PARAMETER = "World";
 
-    private final ThreadLocal<ExecutorService> executorServiceHolder = new ThreadLocal<ExecutorService>();
-    private final ThreadLocal<Sync> syncBeanHolder = new ThreadLocal<Sync>();
-    private final ThreadLocal<CallbackAsync> callbackAsyncHolder = new ThreadLocal<CallbackAsync>();
-    private final ThreadLocal<FutureCallbackAsync> futureCallbackAsyncHolder = new ThreadLocal<FutureCallbackAsync>();
-    private final ThreadLocal<FutureAsync> futureAsyncHolder = new ThreadLocal<FutureAsync>();
-    private final ThreadLocal<ListenableFutureAsync> listenableFutureAsyncHolder = new ThreadLocal<ListenableFutureAsync>();
-    private final ThreadLocal<ObservableAsync> observableAsyncHolder = new ThreadLocal<ObservableAsync>();
+    private final ThreadLocal<ExecutorService> executorServiceHolder = new ThreadLocal<>();
+    private final ThreadLocal<Sync> syncBeanHolder = new ThreadLocal<>();
+    private final ThreadLocal<CallbackAsync> callbackAsyncHolder = new ThreadLocal<>();
+    private final ThreadLocal<FutureCallbackAsync> futureCallbackAsyncHolder = new ThreadLocal<>();
+    private final ThreadLocal<FutureAsync> futureAsyncHolder = new ThreadLocal<>();
+    private final ThreadLocal<ListenableFutureAsync> listenableFutureAsyncHolder = new ThreadLocal<>();
+    private final ThreadLocal<ObservableAsync> observableAsyncHolder = new ThreadLocal<>();
 
     @Before
     public final void before() {
