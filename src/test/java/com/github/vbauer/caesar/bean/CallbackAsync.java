@@ -3,6 +3,8 @@ package com.github.vbauer.caesar.bean;
 import com.github.vbauer.caesar.annotation.Timeout;
 import com.github.vbauer.caesar.callback.AsyncCallback;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @author Vladislav Bauer
  */
@@ -21,7 +23,7 @@ public interface CallbackAsync {
 
     void methodWithoutSyncImpl(AsyncCallback<Boolean> callback);
 
-    @Timeout(1)
+    @Timeout(value = 1, unit = TimeUnit.MILLISECONDS)
     void timeout(AsyncCallback<Boolean> callback);
 
 }

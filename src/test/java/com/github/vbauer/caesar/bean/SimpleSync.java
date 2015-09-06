@@ -6,6 +6,7 @@ package com.github.vbauer.caesar.bean;
 
 public class SimpleSync {
 
+    public static final boolean TIMEOUT_VALUE = true;
     private final int id;
 
 
@@ -16,6 +17,11 @@ public class SimpleSync {
 
     public int getId() {
         return id;
+    }
+
+    public Boolean timeout() throws InterruptedException {
+        Thread.sleep(1000);
+        return TIMEOUT_VALUE;
     }
 
 

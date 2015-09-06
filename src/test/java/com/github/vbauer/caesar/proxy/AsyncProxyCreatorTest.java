@@ -26,7 +26,7 @@ public class AsyncProxyCreatorTest extends BasicTest {
 
     @BeforeClass
     public static void setUp() {
-        EXECUTOR.set(Executors.newFixedThreadPool(5));
+        EXECUTOR.set(Executors.newScheduledThreadPool(5));
     }
 
     @AfterClass

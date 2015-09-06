@@ -3,6 +3,7 @@ package com.github.vbauer.caesar.bean;
 import com.github.vbauer.caesar.annotation.Timeout;
 
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Vladislav Bauer
@@ -22,6 +23,6 @@ public interface FutureAsync {
 
     Future<Boolean> methodWithoutSyncImpl();
 
-    @Timeout(1)
+    @Timeout(value = 1, unit = TimeUnit.MILLISECONDS)
     Future<Boolean> timeout();
 }

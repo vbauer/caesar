@@ -5,7 +5,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Collection;
-import java.util.Iterator;
 
 /**
  * @author Vladislav Bauer 
@@ -20,17 +19,14 @@ public class AsyncMethodRunnerFactoryTest extends BasicTest {
     
     @Test
     public void testCreateMethodRunners() {
+        final int runnersCount = AsyncMethodRunnerFactory.CLASS_NAMES.length;
         final Collection<AsyncMethodRunner> methodRunners =
             AsyncMethodRunnerFactory.createMethodRunners();
 
-        final Iterator<AsyncMethodRunner> iterator = methodRunners.iterator();
-        final int runnersCount = AsyncMethodRunnerFactory.CLASS_NAMES.length;
-
-        //noinspection ForLoopReplaceableByForEach
-        for (int i = 0; i < runnersCount; i++) {
-            Assert.assertNotNull(iterator.next());
-        }
         Assert.assertEquals(runnersCount, methodRunners.size());
+        for (final AsyncMethodRunner methodRunner : methodRunners) {
+            Assert.assertNotNull(methodRunner);
+        }
     }
     
 }

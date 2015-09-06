@@ -2,8 +2,10 @@ package com.github.vbauer.caesar.proxy;
 
 import com.github.vbauer.caesar.annotation.Timeout;
 import com.github.vbauer.caesar.exception.MissedSyncMethodException;
+import com.github.vbauer.caesar.exception.UnsupportedTimeoutException;
 import com.github.vbauer.caesar.runner.AsyncMethodRunner;
 import com.github.vbauer.caesar.runner.AsyncMethodRunnerFactory;
+import com.github.vbauer.caesar.util.ReflectionUtils;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -59,13 +61,17 @@ public final class AsyncInvocationHandler implements InvocationHandler {
     private Object runAsyncMethod(
         final AsyncMethodRunner runner, final Method method, final Object[] args
     ) throws Throwable {
+        final Timeout timeout = getTimeout(method);
+        if (timeout != null && !(executor instanceof ScheduledExecutorService)) {
+            throw new UnsupportedTimeoutException(executor);
+        }
+
         final Method syncMethod = runner.findSyncMethod(origin, method);
         final boolean methodAccessible = syncMethod.isAccessible();
         syncMethod.setAccessible(methodAccessible);
 
         try {
             final Callable<Object> task = runner.createCall(origin, syncMethod, args);
-            final Timeout timeout = getTimeout(method);
             final Future<Object> future = schedule(task, timeout);
             return runner.processResultFuture(future, executor);
         } finally {
@@ -73,20 +79,14 @@ public final class AsyncInvocationHandler implements InvocationHandler {
         }
     }
 
-    private Timeout getTimeout(final Method asyncMethod) {
-        final Timeout annotation = asyncMethod.getAnnotation(Timeout.class);
-        if (annotation != null) {
-            return annotation;
-        }
-
-        final Class<?> originClass = origin.getClass();
-        return originClass.getAnnotation(Timeout.class);
+    private Timeout getTimeout(final Method method) {
+        return ReflectionUtils.findAnnotationFromMethodOrClass(method, Timeout.class);
     }
 
     private Future<Object> schedule(final Callable<Object> task, final Timeout timeout) {
         final Future<Object> future = executor.submit(task);
 
-        if (executor instanceof ScheduledExecutorService && timeout != null) {
+        if (timeout != null) {
             final long value = timeout.value();
             if (value > 0) {
                 final TimeUnit unit = timeout.unit();

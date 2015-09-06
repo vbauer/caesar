@@ -3,6 +3,8 @@ package com.github.vbauer.caesar.bean;
 import com.github.vbauer.caesar.annotation.Timeout;
 import com.google.common.util.concurrent.FutureCallback;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @author Vladislav Bauer
  */
@@ -21,7 +23,7 @@ public interface FutureCallbackAsync {
 
     void methodWithoutSyncImpl(FutureCallback<Boolean> callback);
 
-    @Timeout(1)
+    @Timeout(value = 1, unit = TimeUnit.MILLISECONDS)
     void timeout(FutureCallback<Boolean> callback);
 
 }

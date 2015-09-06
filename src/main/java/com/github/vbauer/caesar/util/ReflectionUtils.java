@@ -1,5 +1,6 @@
 package com.github.vbauer.caesar.util;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -72,6 +73,18 @@ public final class ReflectionUtils {
         } catch (final Throwable ignored) {
             return null;
         }
+    }
+
+    public static <T extends Annotation> T findAnnotationFromMethodOrClass(
+        final Method method, final Class<T> annotationClass
+    ) {
+        final T annotation = method.getAnnotation(annotationClass);
+        if (annotation != null) {
+            return annotation;
+        }
+
+        final Class<?> originClass = method.getDeclaringClass();
+        return originClass.getAnnotation(annotationClass);
     }
 
 }

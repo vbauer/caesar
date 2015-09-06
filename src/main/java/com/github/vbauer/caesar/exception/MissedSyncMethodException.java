@@ -8,7 +8,7 @@ import java.util.Arrays;
  */
 
 @SuppressWarnings("serial")
-public class MissedSyncMethodException extends RuntimeException {
+public class MissedSyncMethodException extends AbstractCaesarException {
 
     private final Method method;
     private final Object[] arguments;

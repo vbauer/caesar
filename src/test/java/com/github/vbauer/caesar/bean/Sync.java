@@ -25,7 +25,7 @@ public class Sync {
     }
 
     public Boolean timeout() throws InterruptedException {
-        Thread.sleep(10000);
+        Thread.sleep(1000);
         return true;
     }
 
