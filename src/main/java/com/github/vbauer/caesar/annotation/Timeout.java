@@ -22,6 +22,6 @@ public @interface Timeout {
     /**
      * @return time unit
      */
-    TimeUnit unit() default TimeUnit.MILLISECONDS;
+    TimeUnit unit() default TimeUnit.SECONDS;
 
 }
