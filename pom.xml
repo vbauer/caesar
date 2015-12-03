@@ -72,7 +72,7 @@
         <maven.pmd.plugin.version>3.5</maven.pmd.plugin.version>
         <maven.animal.sniffer.plugin.version>1.14</maven.animal.sniffer.plugin.version>
         <maven.jacoco.plugin.version>0.7.5.201505241946</maven.jacoco.plugin.version>
-        <maven.coveralls.plugin.version>4.0.0</maven.coveralls.plugin.version>
+        <maven.coveralls.plugin.version>4.1.0</maven.coveralls.plugin.version>
     </properties>
 
     <dependencies>
