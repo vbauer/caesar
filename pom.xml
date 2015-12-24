@@ -52,11 +52,11 @@
         <java.version>1.7</java.version>
 
         <rxjava.version>1.1.0</rxjava.version>
-        <guava.version>18.0</guava.version>
+        <guava.version>19.0</guava.version>
         
         <junit.version>4.12</junit.version>
         <checker.version>1.1.0</checker.version>
-        <hibernate.version>5.0.5.Final</hibernate.version>
+        <hibernate.version>5.0.6.Final</hibernate.version>
 
         <maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
         <maven.source.plugin.version>2.4</maven.source.plugin.version>
@@ -69,7 +69,7 @@
         <maven.site.plugin.version>3.4</maven.site.plugin.version>
 
         <maven.checkstyle.plugin.version>2.17</maven.checkstyle.plugin.version>
-        <maven.pmd.plugin.version>3.5</maven.pmd.plugin.version>
+        <maven.pmd.plugin.version>3.6</maven.pmd.plugin.version>
         <maven.animal.sniffer.plugin.version>1.14</maven.animal.sniffer.plugin.version>
         <maven.jacoco.plugin.version>0.7.5.201505241946</maven.jacoco.plugin.version>
         <maven.coveralls.plugin.version>4.1.0</maven.coveralls.plugin.version>
