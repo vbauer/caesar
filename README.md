@@ -48,7 +48,7 @@ Maven:
 <dependency>
     <groupId>com.github.vbauer</groupId>
     <artifactId>caesar</artifactId>
-    <version>1.6.0</version>
+    <version>1.6.1</version>
 </dependency>
 ```
 
@@ -61,7 +61,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.vbauer:caesar:1.6.0'
+    compile 'com.github.vbauer:caesar:1.6.1'
 }
 ```
 
