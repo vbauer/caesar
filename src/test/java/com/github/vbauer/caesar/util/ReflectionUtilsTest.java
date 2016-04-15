@@ -48,13 +48,13 @@ public class ReflectionUtilsTest extends BasicTest {
     @Test
     public void testClassNames() {
         final String packageName = AsyncMethodRunnerFactory.PACKAGE_NAME;
-        final String[] classNames = AsyncMethodRunnerFactory.CLASS_NAMES;
+        final List<String> classNames = AsyncMethodRunnerFactory.CLASS_NAMES;
         final Collection<String> result =
-            ReflectionUtils.classNames(packageName, Arrays.asList(classNames));
+            ReflectionUtils.classNames(packageName, classNames);
 
-        Assert.assertEquals(classNames.length, result.size());
+        Assert.assertEquals(classNames.size(), result.size());
         Assert.assertEquals(
-            packageName + ReflectionUtils.PACKAGE_SEPARATOR + classNames[0],
+            packageName + ReflectionUtils.PACKAGE_SEPARATOR + classNames.get(0),
             result.iterator().next()
         );
     }

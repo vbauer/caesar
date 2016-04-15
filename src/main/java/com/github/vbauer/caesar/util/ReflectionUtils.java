@@ -24,10 +24,9 @@ public final class ReflectionUtils {
     public static <T> Class<T> getClassWithoutProxies(final Object object) {
         try {
             // XXX: Use HibernateProxyHelper to un-proxy object and get the original class.
-            final Class<?> clazz = Class.forName("org.hibernate.proxy.HibernateProxyHelper");
-            final Method method = clazz.getDeclaredMethod("getClassWithoutInitializingProxy", Object.class);
-
-            return (Class<T>) method.invoke(null, object);
+            return (Class<T>) Class.forName("org.hibernate.proxy.HibernateProxyHelper")
+                .getDeclaredMethod("getClassWithoutInitializingProxy", Object.class)
+                .invoke(null, object);
         } catch (final Exception ex) {
             return getClassSafe(object);
         }

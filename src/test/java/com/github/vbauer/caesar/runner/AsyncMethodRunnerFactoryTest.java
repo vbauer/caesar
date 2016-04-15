@@ -19,7 +19,7 @@ public class AsyncMethodRunnerFactoryTest extends BasicTest {
     
     @Test
     public void testCreateMethodRunners() {
-        final int runnersCount = AsyncMethodRunnerFactory.CLASS_NAMES.length;
+        final int runnersCount = AsyncMethodRunnerFactory.CLASS_NAMES.size();
         final Collection<AsyncMethodRunner> methodRunners =
             AsyncMethodRunnerFactory.createMethodRunners();
 
