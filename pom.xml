@@ -65,7 +65,7 @@
         <maven.install.plugin.version>2.5.2</maven.install.plugin.version>
         <maven.jar.plugin.version>2.6</maven.jar.plugin.version>
         <maven.resources.plugin.version>2.7</maven.resources.plugin.version>
-        <maven.site.plugin.version>3.5</maven.site.plugin.version>
+        <maven.site.plugin.version>3.5.1</maven.site.plugin.version>
 
         <maven.checkstyle.plugin.version>2.17</maven.checkstyle.plugin.version>
         <maven.pmd.plugin.version>3.6</maven.pmd.plugin.version>
