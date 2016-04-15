@@ -220,6 +220,20 @@ public interface Async {
 
 **IMPORTANT:** `ScheduledExecutorService` should be used to switch on this feature.
 
+## Development
+
+To build project in strict mode with tests, you can use your local Maven:
+
+```bash
+mvn -P strict clean package
+```
+
+or use Maven wrapper (it isn't necessary to have installed Maven):
+
+```bash
+./mvnw -P strict clean package
+```
+
 
 ## Might also like
 
