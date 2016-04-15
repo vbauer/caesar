@@ -32,7 +32,7 @@ public class MissedSyncMethodException extends AbstractCaesarException {
     @Override
     public String getMessage() {
         return String.format(
-            "Can't find appropriate sync-method \"%s\", parameters: %s",
+            "Can not find appropriate sync-method \"%s\", parameters: %s",
             getMethod(), Arrays.toString(getArguments())
         );
     }

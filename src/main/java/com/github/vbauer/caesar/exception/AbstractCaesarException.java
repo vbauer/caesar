@@ -9,7 +9,7 @@ public abstract class AbstractCaesarException extends RuntimeException {
 
     @Override
     public String getMessage() {
-        return "Some problem was happened during Caesar work";
+        return "Some problem has happened during Caesar work";
     }
 
 }
