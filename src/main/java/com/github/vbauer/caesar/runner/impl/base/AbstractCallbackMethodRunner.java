@@ -47,16 +47,10 @@ public abstract class AbstractCallbackMethodRunner extends AbstractAsyncMethodRu
     }
 
 
-    /**
-     * {@inheritDoc}
-     */
     protected abstract <T> Callable<T> createCall(
         Object origin, Method syncMethod, Object callback, Object[] args
     );
 
-    /**
-     * {@inheritDoc}
-     */
     protected abstract Class<?> getCallbackClass();
 
 }

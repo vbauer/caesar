@@ -18,6 +18,7 @@ public abstract class AbstractAsyncMethodRunner implements AsyncMethodRunner {
     /**
      * {@inheritDoc}
      */
+    @Override
     public final Method findSyncMethod(final Object origin, final Method asyncMethod) {
         final Class<?> targetClass = ReflectionUtils.getClassWithoutProxies(origin);
         final String methodName = asyncMethod.getName();
@@ -31,6 +32,7 @@ public abstract class AbstractAsyncMethodRunner implements AsyncMethodRunner {
     /**
      * {@inheritDoc}
      */
+    @Override
     public <T> Callable<T> createCall(
         final Object origin, final Method syncMethod, final Object[] args
     ) {
@@ -40,6 +42,7 @@ public abstract class AbstractAsyncMethodRunner implements AsyncMethodRunner {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Object processResultFuture(
         final Future<?> future, final ExecutorService executor
     ) throws Throwable {
@@ -47,9 +50,6 @@ public abstract class AbstractAsyncMethodRunner implements AsyncMethodRunner {
     }
 
 
-    /**
-     * {@inheritDoc}
-     */
     protected abstract Method findSyncMethod(
         Class<?> targetClass, String methodName, Class<?> returnType, Class<?>[] parameterTypes
     );

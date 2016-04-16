@@ -14,12 +14,14 @@ public class FutureCallbackAdapter<T> implements FutureCallback<T> {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void onSuccess(final T result) {
     }
 
     /**
      * {@inheritDoc}
      */
+    @Override
     public void onFailure(final Throwable t) {
     }
 

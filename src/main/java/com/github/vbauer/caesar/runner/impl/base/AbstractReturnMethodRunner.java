@@ -25,9 +25,7 @@ public abstract class AbstractReturnMethodRunner extends AbstractAsyncMethodRunn
             ? ReflectionUtils.findDeclaredMethod(targetClass, methodName, parameterTypes) : null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+
     protected abstract Class<?> getReturnClass(Class<?> originReturnType);
 
 }
