@@ -11,6 +11,9 @@ import java.util.concurrent.Future;
 @SuppressWarnings("all")
 public class FutureMethodRunner extends AbstractReturnMethodRunner {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected Class<?> getReturnClass(final Class<?> originReturnType) {
         return Future.class;

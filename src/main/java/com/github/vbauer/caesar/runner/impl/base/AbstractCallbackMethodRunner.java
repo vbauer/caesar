@@ -12,6 +12,9 @@ import java.util.concurrent.Callable;
 
 public abstract class AbstractCallbackMethodRunner extends AbstractAsyncMethodRunner {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public <T> Callable<T> createCall(final Object origin, final Method syncMethod, final Object[] args) {
         final Object asyncCallback = args[0];
@@ -20,6 +23,9 @@ public abstract class AbstractCallbackMethodRunner extends AbstractAsyncMethodRu
         return createCall(origin, syncMethod, asyncCallback, restArgs);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected Method findSyncMethod(
         final Class<?> targetClass, final String methodName,
@@ -41,10 +47,16 @@ public abstract class AbstractCallbackMethodRunner extends AbstractAsyncMethodRu
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     protected abstract <T> Callable<T> createCall(
         Object origin, Method syncMethod, Object callback, Object[] args
     );
 
+    /**
+     * {@inheritDoc}
+     */
     protected abstract Class<?> getCallbackClass();
 
 }

@@ -15,6 +15,9 @@ import java.util.concurrent.Future;
 
 public abstract class AbstractAsyncMethodRunner implements AsyncMethodRunner {
 
+    /**
+     * {@inheritDoc}
+     */
     public final Method findSyncMethod(final Object origin, final Method asyncMethod) {
         final Class<?> targetClass = ReflectionUtils.getClassWithoutProxies(origin);
         final String methodName = asyncMethod.getName();
@@ -25,12 +28,18 @@ public abstract class AbstractAsyncMethodRunner implements AsyncMethodRunner {
         return findSyncMethod(targetClass, methodName, returnType, parameterTypes);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public <T> Callable<T> createCall(
         final Object origin, final Method syncMethod, final Object[] args
     ) {
         return new SimpleInvokeTask<>(origin, syncMethod, args);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public Object processResultFuture(
         final Future<?> future, final ExecutorService executor
     ) throws Throwable {
@@ -38,6 +47,9 @@ public abstract class AbstractAsyncMethodRunner implements AsyncMethodRunner {
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     protected abstract Method findSyncMethod(
         Class<?> targetClass, String methodName, Class<?> returnType, Class<?>[] parameterTypes
     );

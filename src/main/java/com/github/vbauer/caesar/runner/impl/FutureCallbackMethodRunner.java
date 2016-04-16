@@ -14,6 +14,9 @@ import java.util.concurrent.Callable;
 @SuppressWarnings("all")
 public class FutureCallbackMethodRunner extends AbstractCallbackMethodRunner {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected  <T> Callable<T> createCall(
         final Object origin, final Method syncMethod, final Object callback, final Object[] args
@@ -21,6 +24,9 @@ public class FutureCallbackMethodRunner extends AbstractCallbackMethodRunner {
         return new FutureCallbackTask<T>(origin, syncMethod, args, (FutureCallback) callback);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected Class<?> getCallbackClass() {
         return FutureCallback.class;

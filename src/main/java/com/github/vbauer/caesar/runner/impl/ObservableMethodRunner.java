@@ -13,11 +13,17 @@ import java.util.concurrent.Future;
 @SuppressWarnings("all")
 public class ObservableMethodRunner extends AbstractReturnMethodRunner {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Object processResultFuture(final Future<?> future, final ExecutorService executor) {
         return Observable.from(future);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected Class<?> getReturnClass(final Class<?> originReturnType) {
         return Observable.class;

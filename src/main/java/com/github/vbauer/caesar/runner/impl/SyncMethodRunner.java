@@ -12,11 +12,17 @@ import java.util.concurrent.Future;
 @SuppressWarnings("all")
 public class SyncMethodRunner extends AbstractReturnMethodRunner {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected Class<?> getReturnClass(final Class<?> originReturnType) {
         return originReturnType;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Object processResultFuture(
         final Future<?> future, final ExecutorService executor

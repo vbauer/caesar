@@ -7,6 +7,9 @@ package com.github.vbauer.caesar.exception;
 @SuppressWarnings("serial")
 public abstract class AbstractCaesarException extends RuntimeException {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getMessage() {
         return "Some problem has happened during Caesar work";

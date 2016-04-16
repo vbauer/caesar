@@ -29,6 +29,9 @@ public class MissedSyncMethodException extends AbstractCaesarException {
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getMessage() {
         return String.format(

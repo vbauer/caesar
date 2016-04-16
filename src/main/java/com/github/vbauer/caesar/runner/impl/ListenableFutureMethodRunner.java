@@ -14,11 +14,17 @@ import java.util.concurrent.Future;
 @SuppressWarnings("all")
 public class ListenableFutureMethodRunner extends AbstractReturnMethodRunner {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Object processResultFuture(final Future<?> future, final ExecutorService executor) {
         return JdkFutureAdapters.listenInPoolThread(future, executor);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected Class<?> getReturnClass(final Class<?> originReturnType) {
         return ListenableFuture.class;

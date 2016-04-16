@@ -15,9 +15,11 @@ public class Sync {
     }
 
     public void empty() {
+        // Do nothing.
     }
 
     public void emptyHello(final String name) {
+        // Do nothing.
     }
 
     public void exception() {

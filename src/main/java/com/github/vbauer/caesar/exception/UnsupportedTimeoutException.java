@@ -23,6 +23,9 @@ public class UnsupportedTimeoutException extends AbstractCaesarException {
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getMessage() {
         return String.format(

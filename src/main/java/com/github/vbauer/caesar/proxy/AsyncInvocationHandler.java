@@ -36,6 +36,9 @@ public final class AsyncInvocationHandler implements InvocationHandler {
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     public Object invoke(
         final Object proxy, final Method method, final Object[] args
     ) throws Throwable {
@@ -47,7 +50,7 @@ public final class AsyncInvocationHandler implements InvocationHandler {
     }
 
 
-    /*package*/ AsyncMethodRunner findAsyncMethodRunner(final Method method) {
+    protected AsyncMethodRunner findAsyncMethodRunner(final Method method) {
         for (final AsyncMethodRunner runner : METHOD_RUNNERS) {
             final Method syncMethod = runner.findSyncMethod(origin, method);
             if (syncMethod != null) {
