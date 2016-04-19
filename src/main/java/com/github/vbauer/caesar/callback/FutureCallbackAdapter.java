@@ -16,6 +16,7 @@ public class FutureCallbackAdapter<T> implements FutureCallback<T> {
      */
     @Override
     public void onSuccess(final T result) {
+        // Do nothing.
     }
 
     /**
@@ -23,6 +24,7 @@ public class FutureCallbackAdapter<T> implements FutureCallback<T> {
      */
     @Override
     public void onFailure(final Throwable t) {
+        // Do nothing.
     }
 
 }

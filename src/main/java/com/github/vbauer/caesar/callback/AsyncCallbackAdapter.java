@@ -14,6 +14,7 @@ public class AsyncCallbackAdapter<T> implements AsyncCallback<T> {
      */
     @Override
     public void onSuccess(final T result) {
+        // Do nothing.
     }
 
     /**
@@ -21,6 +22,7 @@ public class AsyncCallbackAdapter<T> implements AsyncCallback<T> {
      */
     @Override
     public void onFailure(final Throwable caught) {
+        // Do nothing.
     }
 
 }
