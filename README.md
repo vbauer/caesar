@@ -6,6 +6,7 @@
 [![Coverage Status](https://coveralls.io/repos/vbauer/caesar/badge.svg?branch=master)](https://coveralls.io/r/vbauer/caesar?branch=master)
 [![Dependency Status](https://www.versioneye.com/user/projects/562e9da136d0ab00210013e1/badge.svg?style=flat)](https://www.versioneye.com/user/projects/562e9da136d0ab00210013e1)
 [![Maven](https://img.shields.io/github/tag/vbauer/caesar.svg?label=maven)](https://jitpack.io/#vbauer/caesar)
+[![Codacy Badge](https://api.codacy.com/project/badge/grade/defb1d30427c4220aa8cf8fc9fa7830c)](https://www.codacy.com/app/bauer-vlad/caesar)
 
 <img align="right" style="margin-left: 15px" width="250" height="268" src="misc/caesar.png">
 
