@@ -14,7 +14,7 @@ public class AsyncMethodRunnerFactoryTest extends BasicTest {
 
     @Test
     public void testConstructorContract() throws Exception {
-        checkUtilConstructorContract(AsyncMethodRunnerFactory.class);
+        Assert.assertTrue(checkUtilConstructorContract(AsyncMethodRunnerFactory.class));
     }
     
     @Test

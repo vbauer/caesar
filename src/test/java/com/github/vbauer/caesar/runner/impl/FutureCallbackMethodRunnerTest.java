@@ -19,7 +19,7 @@ public class FutureCallbackMethodRunnerTest extends BasicRunnerTest {
 
     @Test
     public void testTimeout() throws Throwable {
-        check(new Consumer<FutureCallback<Boolean>>() {
+        Assert.assertTrue(check(new Consumer<FutureCallback<Boolean>>() {
             @Override
             public void set(final FutureCallback<Boolean> callback) {
                 getFutureCallbackAsync().timeout(callback);
@@ -33,30 +33,30 @@ public class FutureCallbackMethodRunnerTest extends BasicRunnerTest {
             public void onFailure(final Throwable t) {
                 Assert.assertNotNull(t);
             }
-        }, false);
+        }, false));
     }
 
     @Test
     public void testWithoutResult() throws Throwable {
-        check(new Consumer<FutureCallback<Void>>() {
+        Assert.assertTrue(check(new Consumer<FutureCallback<Void>>() {
             public void set(final FutureCallback<Void> callback) {
                 getFutureCallbackAsync().empty(callback);
             }
-        }, notNullResultCallback(), true);
+        }, notNullResultCallback(), true));
     }
 
     @Test
     public void test1ArgumentWithoutResult() throws Throwable {
-        check(new Consumer<FutureCallback<Void>>() {
+        Assert.assertTrue(check(new Consumer<FutureCallback<Void>>() {
             public void set(final FutureCallback<Void> callback) {
                 getFutureCallbackAsync().emptyHello(callback, PARAMETER);
             }
-        }, notNullResultCallback(), true);
+        }, notNullResultCallback(), true));
     }
 
     @Test
     public void test1ArgumentWithResult() throws Throwable {
-        check(new Consumer<FutureCallback<String>>() {
+        Assert.assertTrue(check(new Consumer<FutureCallback<String>>() {
             public void set(final FutureCallback<String> callback) {
                 getFutureCallbackAsync().hello(callback, PARAMETER);
             }
@@ -65,12 +65,12 @@ public class FutureCallbackMethodRunnerTest extends BasicRunnerTest {
             public void onSuccess(final String result) {
                 Assert.assertEquals(getSync().hello(PARAMETER), result);
             }
-        }, true);
+        }, true));
     }
 
     @Test
     public void test2ArgumentsWithResult() throws Throwable {
-        check(new Consumer<FutureCallback<String>>() {
+        Assert.assertTrue(check(new Consumer<FutureCallback<String>>() {
             public void set(final FutureCallback<String> callback) {
                 getFutureCallbackAsync().hello(callback, PARAMETER, PARAMETER);
             }
@@ -79,16 +79,16 @@ public class FutureCallbackMethodRunnerTest extends BasicRunnerTest {
             public void onSuccess(final String result) {
                 Assert.assertEquals(getSync().hello(PARAMETER, PARAMETER), result);
             }
-        }, true);
+        }, true));
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void testException() throws Throwable {
-        check(new Consumer<FutureCallback<Void>>() {
+        Assert.assertTrue(check(new Consumer<FutureCallback<Void>>() {
             public void set(final FutureCallback<Void> callback) {
                 getFutureCallbackAsync().exception(callback);
             }
-        }, new FutureCallbackAdapter<Void>(), true);
+        }, new FutureCallbackAdapter<Void>(), true));
     }
 
     @Test(expected = MissedSyncMethodException.class)
@@ -98,7 +98,7 @@ public class FutureCallbackMethodRunnerTest extends BasicRunnerTest {
     }
 
 
-    private <T> void check(
+    private <T> boolean check(
         final Consumer<FutureCallback<T>> operation, final FutureCallback<T> callback,
         final boolean failOnError
     ) throws Throwable {
@@ -134,6 +134,8 @@ public class FutureCallbackMethodRunnerTest extends BasicRunnerTest {
                 throw throwable;
             }
         }
+
+        return true;
     }
 
     private FutureCallbackAdapter<Void> notNullResultCallback() {

@@ -38,25 +38,25 @@ public class AsyncCallbackMethodRunnerTest extends BasicRunnerTest {
 
     @Test
     public void testWithoutResult() throws Throwable {
-        check(new Consumer<AsyncCallback<Void>>() {
+        Assert.assertTrue(check(new Consumer<AsyncCallback<Void>>() {
             public void set(final AsyncCallback<Void> callback) {
                 getCallbackAsync().empty(callback);
             }
-        }, notNullResultCallback(), true);
+        }, notNullResultCallback(), true));
     }
 
     @Test
     public void test1ArgumentWithoutResult() throws Throwable {
-        check(new Consumer<AsyncCallback<Void>>() {
+        Assert.assertTrue(check(new Consumer<AsyncCallback<Void>>() {
             public void set(final AsyncCallback<Void> callback) {
                 getCallbackAsync().emptyHello(callback, PARAMETER);
             }
-        }, notNullResultCallback(), true);
+        }, notNullResultCallback(), true));
     }
 
     @Test
     public void test1ArgumentWithResult() throws Throwable {
-        check(new Consumer<AsyncCallback<String>>() {
+        Assert.assertTrue(check(new Consumer<AsyncCallback<String>>() {
             public void set(final AsyncCallback<String> callback) {
                 getCallbackAsync().hello(callback, PARAMETER);
             }
@@ -65,12 +65,12 @@ public class AsyncCallbackMethodRunnerTest extends BasicRunnerTest {
             public void onSuccess(final String result) {
                 Assert.assertEquals(getSync().hello(PARAMETER), result);
             }
-        }, true);
+        }, true));
     }
 
     @Test
     public void test2ArgumentsWithResult() throws Throwable {
-        check(new Consumer<AsyncCallback<String>>() {
+        Assert.assertTrue(check(new Consumer<AsyncCallback<String>>() {
             public void set(final AsyncCallback<String> callback) {
                 getCallbackAsync().hello(callback, PARAMETER, PARAMETER);
             }
@@ -79,16 +79,16 @@ public class AsyncCallbackMethodRunnerTest extends BasicRunnerTest {
             public void onSuccess(final String result) {
                 Assert.assertEquals(getSync().hello(PARAMETER, PARAMETER), result);
             }
-        }, true);
+        }, true));
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void testException() throws Throwable {
-        check(new Consumer<AsyncCallback<Void>>() {
+        Assert.assertTrue(check(new Consumer<AsyncCallback<Void>>() {
             public void set(final AsyncCallback<Void> callback) {
                 getCallbackAsync().exception(callback);
             }
-        }, new AsyncCallbackAdapter<Void>(), true);
+        }, new AsyncCallbackAdapter<Void>(), true));
     }
 
     @Test(expected = MissedSyncMethodException.class)
@@ -98,7 +98,7 @@ public class AsyncCallbackMethodRunnerTest extends BasicRunnerTest {
     }
 
 
-    private <T> void check(
+    private <T> boolean check(
         final Consumer<AsyncCallback<T>> operation, final AsyncCallback<T> callback,
         final boolean failOnError
     ) throws Throwable {
@@ -134,6 +134,8 @@ public class AsyncCallbackMethodRunnerTest extends BasicRunnerTest {
                 throw throwable;
             }
         }
+
+        return true;
     }
 
     private AsyncCallbackAdapter<Void> notNullResultCallback() {

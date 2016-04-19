@@ -12,13 +12,15 @@ import org.junit.runners.BlockJUnit4ClassRunner;
 @RunWith(BlockJUnit4ClassRunner.class)
 public abstract class BasicTest {
 
-    protected final void checkUtilConstructorContract(final Class<?>... utilClasses) throws Exception {
+    protected final boolean checkUtilConstructorContract(final Class<?>... utilClasses) throws Exception {
         Assert.assertTrue(utilClasses.length > 0);
 
         PrivateConstructorChecker
             .forClasses(utilClasses)
             .expectedTypeOfException(UnsupportedOperationException.class)
             .check();
+
+        return true;
     }
 
 }

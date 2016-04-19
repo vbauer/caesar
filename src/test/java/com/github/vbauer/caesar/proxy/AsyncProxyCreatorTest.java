@@ -36,7 +36,7 @@ public class AsyncProxyCreatorTest extends BasicTest {
 
     @Test
     public void testConstructorContract() throws Exception {
-        checkUtilConstructorContract(AsyncProxyCreator.class);
+        Assert.assertTrue(checkUtilConstructorContract(AsyncProxyCreator.class));
     }
 
     @Test(expected = MissedSyncMethodException.class)

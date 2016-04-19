@@ -3,6 +3,7 @@ package com.github.vbauer.caesar.runner.impl.base;
 import com.github.vbauer.caesar.util.ReflectionUtils;
 
 import java.lang.reflect.Method;
+import java.util.Objects;
 
 /**
  * {@link AbstractAsyncMethodRunner}
@@ -21,7 +22,7 @@ public abstract class AbstractReturnMethodRunner extends AbstractAsyncMethodRunn
         final Class<?> returnType, final Class<?>[] parameterTypes
     ) {
         final Class<?> returnClass = getReturnClass(returnType);
-        return returnClass == returnType
+        return Objects.equals(returnClass, returnType)
             ? ReflectionUtils.findDeclaredMethod(targetClass, methodName, parameterTypes) : null;
     }
 

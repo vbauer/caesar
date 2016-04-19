@@ -20,7 +20,7 @@ public class ReflectionUtilsTest extends BasicTest {
 
     @Test
     public void testConstructorContract() throws Exception {
-        checkUtilConstructorContract(ReflectionUtils.class);
+        Assert.assertTrue(checkUtilConstructorContract(ReflectionUtils.class));
     }
 
     @Test
