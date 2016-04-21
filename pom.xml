@@ -66,6 +66,8 @@
         <maven.jar.plugin.version>2.6</maven.jar.plugin.version>
         <maven.resources.plugin.version>2.7</maven.resources.plugin.version>
         <maven.site.plugin.version>3.5.1</maven.site.plugin.version>
+        <maven.project.info.reports.plugin.version>2.9</maven.project.info.reports.plugin.version>
+        <maven.javadoc.plugin.version>2.10.3</maven.javadoc.plugin.version>
 
         <maven.checkstyle.plugin.version>2.17</maven.checkstyle.plugin.version>
         <maven.pmd.plugin.version>3.6</maven.pmd.plugin.version>
@@ -186,6 +188,12 @@
                 <version>${maven.site.plugin.version}</version>
             </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>${maven.project.info.reports.plugin.version}</version>
+            </plugin>
+
             <!-- Additional plugins -->
 
             <plugin>
@@ -285,5 +293,23 @@
         </profile>
 
     </profiles>
+
+    <reporting>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven.javadoc.plugin.version}</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>${maven.surefire.plugin.version}</version>
+            </plugin>
+
+        </plugins>
+    </reporting>
 
 </project>

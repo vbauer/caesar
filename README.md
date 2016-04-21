@@ -22,6 +22,11 @@ that you can still think in terms of your service/bean/object and use its method
 
 Caesar will help you to solve these problems.
 
+**Online documentation:**
+
+* [Maven site](https://vbauer.github.io/caesar)
+* [Javadoc](https://vbauer.github.io/caesar/apidocs)
+
 
 ## Main features:
 

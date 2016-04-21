@@ -1,14 +1,21 @@
 language: java
+
 script: mvn clean package -P strict
+
 after_success:
   - mvn jacoco:report coveralls:report
+  - bash ./deploy.sh
+
 jdk:
   - oraclejdk7
   - oraclejdk8
-branches:
-  only:
-  - master
+
 sudo: false
 cache:
   directories:
     - $HOME/.m2
+
+env:
+  global:
+  - GH_REF: github.com/vbauer/caesar.git
+  - secure: "eStOv4Qx5mX2IpbkvXUTfolh5dLTV6g4Lge2t5KQHF9gw00Hct0kI0xHJKOr7TXT6e61+dWJdhv2X7AHbQwIE+IGySEOA4jUhiS5bEArylgnjU9Jfcrs7wJZR0oaOWumRjvFuZ1I/o5CAD8EYR06YwNR87wDuzUOnEvok2eT+Uw="
