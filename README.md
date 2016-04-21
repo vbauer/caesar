@@ -234,12 +234,6 @@ To build project in strict mode with tests, you can use your local Maven:
 mvn -P strict clean package
 ```
 
-or use Maven wrapper (it isn't necessary to have installed Maven):
-
-```bash
-./mvnw -P strict clean package
-```
-
 
 ## Might also like
 
