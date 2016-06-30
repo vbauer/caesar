@@ -6,7 +6,7 @@
 
     <groupId>com.github.vbauer</groupId>
     <artifactId>caesar</artifactId>
-    <version>1.6.2</version>
+    <version>1.6.3</version>
 
     <description>Converting synchronous beans to asynchronous</description>
     <url>https://github.com/vbauer/caesar</url>
