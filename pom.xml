@@ -223,6 +223,17 @@
     <profiles>
 
         <profile>
+            <id>jdk7</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <jdk>1.7</jdk>
+            </activation>
+            <properties>
+                <guava.version>20.0</guava.version>
+            </properties>
+        </profile>
+
+        <profile>
             <id>strict</id>
             <build>
                 <plugins>
