@@ -7,7 +7,6 @@ after_success:
   - bash ./deploy.sh
 
 jdk:
-  - oraclejdk7
   - oraclejdk8
 
 sudo: false

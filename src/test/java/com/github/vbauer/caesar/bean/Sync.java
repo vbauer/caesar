@@ -18,7 +18,7 @@ public class Sync {
         // Do nothing.
     }
 
-    public void emptyHello(final String name) {
+    public void emptyHello(@SuppressWarnings("unused") final String name) {
         // Do nothing.
     }
 

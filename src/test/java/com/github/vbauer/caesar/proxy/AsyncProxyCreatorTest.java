@@ -30,22 +30,22 @@ public class AsyncProxyCreatorTest extends BasicTest {
     }
 
     @AfterClass
-    public static void tearDown() throws Exception {
+    public static void tearDown() {
         executor().shutdown();
     }
 
     @Test
-    public void testConstructorContract() throws Exception {
+    public void testConstructorContract() {
         Assert.assertTrue(checkUtilConstructorContract(AsyncProxyCreator.class));
     }
 
     @Test(expected = MissedSyncMethodException.class)
-    public void testIncorrectProxy() throws Throwable {
+    public void testIncorrectProxy() {
         Assert.fail(String.valueOf(AsyncProxyCreator.create(new Sync(), List.class, executor())));
     }
 
     @Test(expected = MissedSyncMethodException.class)
-    public void testBadProxy() throws Throwable {
+    public void testBadProxy() {
         Assert.fail(String.valueOf(
             AsyncProxyCreator.create(new Sync(), CallbackAsync.class, executor())
         ));

@@ -15,14 +15,14 @@ import java.util.concurrent.CancellationException;
 public class ObservableMethodRunnerTest extends BasicRunnerTest {
 
     @Test(expected = CancellationException.class)
-    public void testTimeout() throws Throwable {
+    public void testTimeout() {
         final Observable<Boolean> observable = getObservableAsync().timeout();
         Assert.assertNotNull(observable);
         Assert.fail(String.valueOf(observable.toBlocking().first()));
     }
 
     @Test
-    public void testWithoutResult() throws Throwable {
+    public void testWithoutResult() {
         getSync().empty();
 
         final Observable<Void> observable = getObservableAsync().empty();
@@ -31,7 +31,7 @@ public class ObservableMethodRunnerTest extends BasicRunnerTest {
     }
 
     @Test
-    public void test1ArgumentWithoutResult() throws Throwable {
+    public void test1ArgumentWithoutResult() {
         getSync().emptyHello(PARAMETER);
 
         final Observable<Void> observable = getObservableAsync().emptyHello(PARAMETER);
@@ -40,7 +40,7 @@ public class ObservableMethodRunnerTest extends BasicRunnerTest {
     }
 
     @Test
-    public void test1ArgumentWithResult() throws Throwable {
+    public void test1ArgumentWithResult() {
         Assert.assertEquals(
             getSync().hello(PARAMETER),
             getObservableAsync().hello(PARAMETER).toBlocking().first()
@@ -48,7 +48,7 @@ public class ObservableMethodRunnerTest extends BasicRunnerTest {
     }
 
     @Test
-    public void test2ArgumentsWithResult() throws Throwable {
+    public void test2ArgumentsWithResult() {
         Assert.assertEquals(
             getSync().hello(PARAMETER, PARAMETER),
             getObservableAsync().hello(PARAMETER, PARAMETER).toBlocking().first()
@@ -56,13 +56,13 @@ public class ObservableMethodRunnerTest extends BasicRunnerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void testException() throws Throwable {
+    public void testException() {
         getObservableAsync().exception().toBlocking().first();
         Assert.fail();
     }
 
     @Test(expected = MissedSyncMethodException.class)
-    public void testIncorrectProxyOnDemand() throws Throwable {
+    public void testIncorrectProxyOnDemand() {
         Assert.fail(String.valueOf(getObservableAsync().methodWithoutSyncImpl()));
     }
 

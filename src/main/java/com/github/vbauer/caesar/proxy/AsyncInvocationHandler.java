@@ -94,22 +94,13 @@ public final class AsyncInvocationHandler implements InvocationHandler {
             final long value = timeout.value();
             if (value > 0) {
                 final TimeUnit unit = timeout.unit();
-                final Runnable cancelOperation = createCancelOperation(future);
+                final Runnable cancelOperation = () -> future.cancel(true);
                 final ScheduledExecutorService scheduler = (ScheduledExecutorService) executor;
                 scheduler.schedule(cancelOperation, value, unit);
             }
         }
 
         return future;
-    }
-
-    private Runnable createCancelOperation(final Future<Object> future) {
-        return new Runnable() {
-            @Override
-            public void run() {
-                future.cancel(true);
-            }
-        };
     }
 
 }

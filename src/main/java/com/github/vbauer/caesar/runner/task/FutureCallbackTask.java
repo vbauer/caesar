@@ -30,7 +30,7 @@ public class FutureCallbackTask<T> implements Callable<T> {
 
 
     @SuppressWarnings("unchecked")
-    public T call() throws Exception {
+    public T call() {
         final Object result;
 
         try {
@@ -44,4 +44,5 @@ public class FutureCallbackTask<T> implements Callable<T> {
 
         return (T) result;
     }
+
 }

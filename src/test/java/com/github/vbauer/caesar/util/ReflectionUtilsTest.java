@@ -6,7 +6,9 @@ import com.google.common.collect.Lists;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Vladislav Bauer
@@ -19,7 +21,7 @@ public class ReflectionUtilsTest extends BasicTest {
 
 
     @Test
-    public void testConstructorContract() throws Exception {
+    public void testConstructorContract() {
         Assert.assertTrue(checkUtilConstructorContract(ReflectionUtils.class));
     }
 
@@ -29,7 +31,7 @@ public class ReflectionUtilsTest extends BasicTest {
             Object.class,
             ReflectionUtils.getClassSafe(ReflectionUtils.createObject(CLASS_OBJECT))
         );
-        Assert.assertEquals(null, ReflectionUtils.createObject(null));
+        Assert.assertArrayEquals((Object[]) null, ReflectionUtils.createObject(null));
     }
 
     @Test

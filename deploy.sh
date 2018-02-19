@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Exit with nonzero exit code if anything fails
-set -e
+accept -e
 
 # Lets work only for master
 if ! [ "$TRAVIS_BRANCH" = "master" ]

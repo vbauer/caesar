@@ -63,7 +63,7 @@ public class ListenableFutureMethodRunnerTest extends BasicRunnerTest {
     }
 
     @Test(expected = MissedSyncMethodException.class)
-    public void testIncorrectProxyOnDemand() throws Throwable {
+    public void testIncorrectProxyOnDemand() {
         Assert.fail(String.valueOf(getListenableFutureAsync().methodWithoutSyncImpl()));
     }
 

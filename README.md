@@ -39,7 +39,7 @@ Caesar will help you to solve these problems.
 * Compact and very simple API
 * Configurable timeouts
 * Compatibility:
-    * Java 7+
+    * Java 8+
     * Android
 
 ## Setup

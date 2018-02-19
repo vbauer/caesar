@@ -13,7 +13,7 @@ import java.util.Collection;
 public class AsyncMethodRunnerFactoryTest extends BasicTest {
 
     @Test
-    public void testConstructorContract() throws Exception {
+    public void testConstructorContract() {
         Assert.assertTrue(checkUtilConstructorContract(AsyncMethodRunnerFactory.class));
     }
     
