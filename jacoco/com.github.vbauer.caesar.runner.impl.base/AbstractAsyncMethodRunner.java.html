@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractAsyncMethodRunner.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">caesar</a> &gt; <a href="index.source.html" class="el_package">com.github.vbauer.caesar.runner.impl.base</a> &gt; <span class="el_source">AbstractAsyncMethodRunner.java</span></div><h1>AbstractAsyncMethodRunner.java</h1><pre class="source lang-java linenums">package com.github.vbauer.caesar.runner.impl.base;
+
+import com.github.vbauer.caesar.runner.AsyncMethodRunner;
+import com.github.vbauer.caesar.runner.task.SimpleInvokeTask;
+import com.github.vbauer.caesar.util.ReflectionUtils;
+
+import java.lang.reflect.Method;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+
+/**
+ * @author Vladislav Bauer
+ */
+
+<span class="fc" id="L16">public abstract class AbstractAsyncMethodRunner implements AsyncMethodRunner {</span>
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final Method findSyncMethod(final Object origin, final Method asyncMethod) {
+<span class="fc" id="L23">        final Class&lt;?&gt; targetClass = ReflectionUtils.getClassWithoutProxies(origin);</span>
+<span class="fc" id="L24">        final String methodName = asyncMethod.getName();</span>
+
+<span class="fc" id="L26">        final Class&lt;?&gt; returnType = asyncMethod.getReturnType();</span>
+<span class="fc" id="L27">        final Class&lt;?&gt;[] parameterTypes = asyncMethod.getParameterTypes();</span>
+
+<span class="fc" id="L29">        return findSyncMethod(targetClass, methodName, returnType, parameterTypes);</span>
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public &lt;T&gt; Callable&lt;T&gt; createCall(
+        final Object origin, final Method syncMethod, final Object[] args
+    ) {
+<span class="fc" id="L39">        return new SimpleInvokeTask&lt;&gt;(origin, syncMethod, args);</span>
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object processResultFuture(
+        final Future&lt;?&gt; future, final ExecutorService executor
+    ) throws Throwable {
+<span class="fc" id="L49">        return future;</span>
+    }
+
+
+    protected abstract Method findSyncMethod(
+        Class&lt;?&gt; targetClass, String methodName, Class&lt;?&gt; returnType, Class&lt;?&gt;[] parameterTypes
+    );
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

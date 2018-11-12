@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReflectionUtils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">caesar</a> &gt; <a href="index.source.html" class="el_package">com.github.vbauer.caesar.util</a> &gt; <span class="el_source">ReflectionUtils.java</span></div><h1>ReflectionUtils.java</h1><pre class="source lang-java linenums">package com.github.vbauer.caesar.util;
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+/**
+ * @author Vladislav Bauer
+ */
+
+@SuppressWarnings(&quot;unchecked&quot;)
+public final class ReflectionUtils {
+
+    public static final String PACKAGE_SEPARATOR = &quot;.&quot;;
+    
+
+<span class="fc" id="L19">    private ReflectionUtils() {</span>
+<span class="fc" id="L20">        throw new UnsupportedOperationException();</span>
+    }
+
+
+    public static &lt;T&gt; Class&lt;T&gt; getClassWithoutProxies(final Object object) {
+        try {
+            // XXX: Use HibernateProxyHelper to un-proxy object and get the original class.
+<span class="nc" id="L27">            return (Class&lt;T&gt;) Class.forName(&quot;org.hibernate.proxy.HibernateProxyHelper&quot;)</span>
+<span class="nc" id="L28">                .getDeclaredMethod(&quot;getClassWithoutInitializingProxy&quot;, Object.class)</span>
+<span class="nc" id="L29">                .invoke(null, object);</span>
+<span class="fc" id="L30">        } catch (final Exception ex) {</span>
+<span class="fc" id="L31">            return getClassSafe(object);</span>
+        }
+    }
+
+    public static &lt;T&gt; Class&lt;T&gt; getClassSafe(final Object object) {
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        return object != null ? (Class&lt;T&gt;) object.getClass() : null;</span>
+    }
+
+    public static &lt;T&gt; T createObject(final String className) {
+        try {
+<span class="fc" id="L41">            final Class&lt;?&gt; clazz = Class.forName(className);</span>
+<span class="fc" id="L42">            return (T) clazz.newInstance();</span>
+<span class="fc" id="L43">        } catch (final Throwable ex) {</span>
+<span class="fc" id="L44">            return null;</span>
+        }
+    }
+
+    public static &lt;T&gt; Collection&lt;T&gt; createObjects(final Collection&lt;String&gt; classNames) {
+<span class="fc" id="L49">        final List&lt;T&gt; objects = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        for (final String className : classNames) {</span>
+<span class="fc" id="L51">            final T object = createObject(className);</span>
+<span class="pc bpc" id="L52" title="1 of 2 branches missed.">            if (object != null) {</span>
+<span class="fc" id="L53">                objects.add(object);</span>
+            }
+<span class="fc" id="L55">        }</span>
+<span class="fc" id="L56">        return objects;</span>
+    }
+    
+    public static Collection&lt;String&gt; classNames(final String packageName, final Collection&lt;String&gt; classNames) {
+<span class="fc" id="L60">        final List&lt;String&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        for (final String className : classNames) {</span>
+<span class="fc" id="L62">            result.add(packageName + PACKAGE_SEPARATOR + className);</span>
+<span class="fc" id="L63">        }</span>
+<span class="fc" id="L64">        return result;        </span>
+    }
+
+    public static Method findDeclaredMethod(
+        final Class&lt;?&gt; objectClass, final String methodName, final Class&lt;?&gt;[] parameterTypes
+    ) {
+        try {
+<span class="fc" id="L71">            return objectClass.getDeclaredMethod(methodName, parameterTypes);</span>
+<span class="fc" id="L72">        } catch (final Throwable ignored) {</span>
+<span class="fc" id="L73">            return null;</span>
+        }
+    }
+
+    public static &lt;T extends Annotation&gt; T findAnnotationFromMethodOrClass(
+        final Method method, final Class&lt;T&gt; annotationClass
+    ) {
+<span class="fc" id="L80">        final T annotation = method.getAnnotation(annotationClass);</span>
+<span class="fc bfc" id="L81" title="All 2 branches covered.">        if (annotation != null) {</span>
+<span class="fc" id="L82">            return annotation;</span>
+        }
+
+<span class="fc" id="L85">        final Class&lt;?&gt; originClass = method.getDeclaringClass();</span>
+<span class="fc" id="L86">        return originClass.getAnnotation(annotationClass);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

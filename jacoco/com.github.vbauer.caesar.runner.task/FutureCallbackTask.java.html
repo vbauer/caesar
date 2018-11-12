@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FutureCallbackTask.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">caesar</a> &gt; <a href="index.source.html" class="el_package">com.github.vbauer.caesar.runner.task</a> &gt; <span class="el_source">FutureCallbackTask.java</span></div><h1>FutureCallbackTask.java</h1><pre class="source lang-java linenums">package com.github.vbauer.caesar.runner.task;
+
+import com.google.common.util.concurrent.FutureCallback;
+
+import java.lang.reflect.Method;
+import java.util.concurrent.Callable;
+
+/**
+ * @author Vladislav Bauer
+ * @param &lt;T&gt; result type
+ */
+
+public class FutureCallbackTask&lt;T&gt; implements Callable&lt;T&gt; {
+
+    private final Object origin;
+    private final Object[] args;
+    private final Method syncMethod;
+    private final FutureCallback futureCallback;
+
+
+    public FutureCallbackTask(
+        final Object origin, final Method syncMethod, final Object[] args,
+        final FutureCallback futureCallback
+<span class="fc" id="L24">    ) {</span>
+<span class="fc" id="L25">        this.origin = origin;</span>
+<span class="fc" id="L26">        this.args = args;</span>
+<span class="fc" id="L27">        this.syncMethod = syncMethod;</span>
+<span class="fc" id="L28">        this.futureCallback = futureCallback;</span>
+<span class="fc" id="L29">    }</span>
+
+
+    @SuppressWarnings(&quot;unchecked&quot;)
+    public T call() {
+        final Object result;
+
+        try {
+<span class="fc" id="L37">            result = syncMethod.invoke(origin, args);</span>
+<span class="fc" id="L38">        } catch (final Throwable ex) {</span>
+<span class="fc" id="L39">            futureCallback.onFailure(ex.getCause());</span>
+<span class="fc" id="L40">            return null;</span>
+<span class="fc" id="L41">        }</span>
+
+<span class="fc" id="L43">        futureCallback.onSuccess(result);</span>
+
+<span class="fc" id="L45">        return (T) result;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
