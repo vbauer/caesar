@@ -4,7 +4,6 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Caesar-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1598)
 [![Build Status](https://travis-ci.org/vbauer/caesar.svg)](https://travis-ci.org/vbauer/caesar)
 [![Coverage Status](https://coveralls.io/repos/vbauer/caesar/badge.svg?branch=master)](https://coveralls.io/r/vbauer/caesar?branch=master)
-[![Dependency Status](https://www.versioneye.com/user/projects/562e9da136d0ab00210013e1/badge.svg?style=flat)](https://www.versioneye.com/user/projects/562e9da136d0ab00210013e1)
 [![Maven](https://img.shields.io/github/tag/vbauer/caesar.svg?label=maven)](https://jitpack.io/#vbauer/caesar)
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/defb1d30427c4220aa8cf8fc9fa7830c)](https://www.codacy.com/app/bauer-vlad/caesar)
 
